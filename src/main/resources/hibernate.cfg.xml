@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+    <session-factory>
+    	<property name="hibernate.show_sql">true</property>
+
+    	<property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">cms</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/cms</property>
+        <property name="hibernate.connection.username">cms</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+		<property name="hibernate.naming_strategy">com.mywebgalery.cms.model.CMSNamingStrategy</property>
+
+
+
+        <mapping class="com.rushmore.tickets.model.IdSourceDummy"/>
+		<mapping class="com.rushmore.tickets.model.audit.Revision"/>
+
+		<mapping class="com.rushmore.tickets.model.Client"/>
+		<mapping class="com.rushmore.tickets.model.Order"/>
+		<mapping class="com.rushmore.tickets.model.OrderRequest"/>
+		<mapping class="com.rushmore.tickets.model.Report"/>
+		<mapping class="com.rushmore.tickets.model.Location"/>
+		<mapping class="com.rushmore.tickets.model.Sector"/>
+		<mapping class="com.rushmore.tickets.model.Seat"/>
+		<mapping class="com.rushmore.tickets.model.EventActivity"/>
+		<mapping class="com.rushmore.tickets.model.Ticket"/>
+
+
+        <mapping class="com.rushmore.user.db.Action"/>
+        <mapping class="com.rushmore.user.db.Resource"/>
+        <mapping class="com.rushmore.user.db.Role"/>
+        <mapping class="com.rushmore.user.db.RoleContainer"/>
+        <mapping class="com.rushmore.user.db.User"/>
+        <mapping class="com.rushmore.user.db.UserGroup"/>
+
+ 		<mapping class="com.rushmore.events.persist.Activity"/>
+ 		<mapping class="com.rushmore.events.persist.Event"/>
+
+  		<mapping class="com.rushmore.mail.persist.Email"/>
+  		<mapping class="com.rushmore.mail.persist.EmailLog"/>
+
+		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-insert"/>
+		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-update"/>
+		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-delete"/>
+		<!-- listener class="org.hibernate.envers.event.AuditEventListener" type="pre-collection-update"/>
+		<listener class="org.hibernate.envers.event.AuditEventListener" type="pre-collection-remove"/>
+		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-collection-recreate"/-->
+
+     </session-factory>
+</hibernate-configuration>

@@ -48,6 +48,60 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+        	<groupId>javax.mail</groupId>
+        	<artifactId>mail</artifactId>
+        	<version>1.4.1</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>javax.activation</groupId>
+        	<artifactId>activation</artifactId>
+        	<version>1.1</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>postgresql</groupId>
+        	<artifactId>postgresql</artifactId>
+        	<version>8.4-702.jdbc4</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>commons-logging</groupId>
+        	<artifactId>commons-logging</artifactId>
+        	<version>1.1.1</version>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.tapestry</groupId>
+        	<artifactId>tapestry-upload</artifactId>
+        	<version>${tapestry-release-version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.hibernate</groupId>
+        	<artifactId>hibernate-envers</artifactId>
+        	<version>3.5.6-Final</version>
+        	<exclusions>
+        		<exclusion>
+        			<artifactId>slf4j-api</artifactId>
+        			<groupId>org.slf4j</groupId>
+        		</exclusion>
+        	</exclusions>
+        </dependency>
+        <dependency>
+        	<groupId>org.hibernate</groupId>
+        	<artifactId>hibernate-annotations</artifactId>
+        	<version>3.5.6-Final</version>
+        	<exclusions>
+        		<exclusion>
+        			<artifactId>slf4j-api</artifactId>
+        			<groupId>org.slf4j</groupId>
+        		</exclusion>
+        	</exclusions>
+        </dependency>
 
     </dependencies>
     <build>
