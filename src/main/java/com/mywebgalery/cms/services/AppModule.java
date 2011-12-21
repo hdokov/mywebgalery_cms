@@ -14,6 +14,8 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.services.ApplicationStateContribution;
 import org.apache.tapestry5.services.ApplicationStateCreator;
+import org.apache.tapestry5.services.BeanBlockContribution;
+import org.apache.tapestry5.services.DisplayBlockContribution;
 import org.apache.tapestry5.services.Environment;
 import org.apache.tapestry5.services.MarkupRenderer;
 import org.apache.tapestry5.services.MarkupRendererFilter;
@@ -102,8 +104,8 @@ public class AppModule
                 finally
                 {
                     long elapsed = System.currentTimeMillis() - startTime;
-
-                    log.info(String.format("Request time: %d ms", elapsed));
+                    if(!request.getPath().startsWith("/assets") && !"/favicon.ico".equals(request.getPath()))
+                    	log.info(String.format("Request time (%s): %d ms",request.getPath(),  elapsed));
                 }
             }
         };
@@ -124,7 +126,7 @@ public class AppModule
         // set constraints to precisely control the invocation order of the contributed filter
         // within the pipeline.
 
-        //configuration.add("Timing", filter);
+        configuration.add("Timing", filter);
     }
 	public void contributeApplicationStateManager(MappedConfiguration<Class<?>, ApplicationStateContribution> configuration) {
 		ApplicationStateCreator<UserSessionData> creator = new ApplicationStateCreator<UserSessionData>() {
@@ -179,5 +181,13 @@ public class AppModule
 	public static void contributeIgnoredPathsFilter(Configuration<String> configuration) {
 		configuration.add("/img/.*");
 		configuration.add("/css/.*");
+		configuration.add("/templates/.*");
 	}
+
+	public void contributeBeanBlockSource(Configuration<BeanBlockContribution> configuration) {
+	    configuration.add(new DisplayBlockContribution("module.login", "DisplayBlocks", "login"));
+	    //configuration.add(new DisplayBlockContribution("date", "DisplayBlocks", "datedisplay"));
+	    //configuration.add(new DisplayBlockContribution("datecol", "DisplayBlocks", "datedisplay"));
+	}
+
 }

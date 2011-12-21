@@ -1,0 +1,5 @@
+.page {width: 900px; margin: auto;}
+.floatfix {clear: both; height: 0px;}
+.left_panel {width: 200px; float: left;}
+.content {width: 480px; float: left; margin-left: 10px;}
+.right_panel {width: 200px; float: right;}
