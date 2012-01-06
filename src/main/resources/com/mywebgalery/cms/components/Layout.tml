@@ -1,82 +1,105 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--
-
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
-
-Title      : Concrete
-Version    : 1.0
-Released   : 20080825
-Description: A Web 2.0 design with fluid width suitable for blogs and small websites.
--->
-        <html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
     <head>
+		<meta http-equiv="Cache-Control" content="max-age=0" />
+		<!-- meta name="keywords" content="${app.keywords}" />
+		<meta name="description" content="${app.descr}" /-->
+		<meta id="robots" name="robots" content="noodp,noydir" />
+		<meta name="robots" content="index,follow,all" />
+		<meta http-equiv="Content-Language" content="en-us" />
+		<meta http-equiv="expires" content="now" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta name="distribution" content="global" />
+		<meta name="revisit-after" content="5 days" />
+	    <link rel="shortcut icon" href="/favicon.ico" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
         <title>${title}</title>
+        <link href="/css/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+      	<link href="/css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <!-- start header -->
         <div id="header">
-            <div id="logo">
-                <h1>
-                    <t:pagelink page="index">com.mywebgalery:cms</t:pagelink>
-                </h1>
-            </div>
-            <div id="menu">
-                <ul>
-                    <li t:type="loop" source="pageNames" value="pageName" class="prop:classForPageName">
-                        <t:pagelink page="prop:pageName">${pageName}</t:pagelink>
-                    </li>
-                </ul>
-            </div>
+			<h1 id="logo">
+				<t:pagelink page="admin/index">
+					<img src='/images/logo.png' alt='My Web Galery' />
+				</t:pagelink>
+			</h1>
+			<ul class='topmenu'>
+				<li class='welcome'>${message:label.welcome_to}</li>
+				<t:if test="user.anonymous">
+					<li><t:pagelink page='admin/register'>${message:label.register}</t:pagelink></li>
+				</t:if>
+				<li class='last'>
+					<t:if test="user.anonymous">
+						<t:pagelink page='admin/login'>${message:label.login}</t:pagelink>
+					<t:parameter name='else'>
+						<t:actionlink t:id='logout'>${message:label.logout}</t:actionlink>
+					</t:parameter>
+					</t:if>
+
+				</li>
+			</ul>
+            <div class='floatfix'></div>
         </div>
         <!-- end header -->
         <!-- start page -->
         <div id="page">
             <!-- start sidebar -->
             <div id="sidebar">
-                <ul>
-                    <li id="search" style="background: none;">
-                    </li>
-                    <li t:type="if" test="sidebar">
-                        <h2>${sidebarTitle}</h2>
-                        <div class="sidebar-content">
-                            <t:delegate to="sidebar"/>
-                        </div>
-                    </li>
-                </ul>
+	            <t:if test="sidebar">
+	               <t:delegate to="sidebar"/>
+	            <t:parameter name='else'>
+		        	<ul class='menu'>
+		        		<t:if test='user.anonymous'>
+		        			<li><t:pagelink page="admin/login">${message:label.login}</t:pagelink></li>
+		        			<li><t:pagelink page="admin/register">${message:label.register}</t:pagelink></li>
+		        		<t:parameter name='else'>
+		        			<li><t:pagelink page="admin/myprofile">${message:label.myprofile}</t:pagelink></li>
+		        		</t:parameter>
+		        		</t:if>
+			            <li t:type="loop" source="pages" value="page">
+			                <t:pagelink page="admin/index" context="prop:page">${pageName}</t:pagelink>
+			            </li>
+		            </ul>
+	            </t:parameter>
+	            </t:if>
             </div>
             <!-- end sidebar -->
             <!-- start content -->
             <div id="content">
-                <div class="post">
-                    <div class="title">
-                        <h2>${title}</h2>
-                    </div>
-                    <div class="entry">
-                        <t:body/>
-                    </div>
-                </div>
+	            <div class="title">
+	                <h2>${title}</h2>
+	                <t:messages />
+	            </div>
+	            <div class="entry">
+	                <t:body/>
+		            <div class='floatfix'></div>
+	            </div>
             </div>
             <!-- end content -->
-            <br style="clear: both;"/>
         </div>
+        <div class='floatfix'></div>
         <!-- end page -->
         <!-- start footer -->
         <div id="footer">
+        	<ul class='footermenu'>
+	            <li t:type="loop" source="pages" value="page">
+	                <t:pagelink page="admin/index" context="prop:page">${pageName}</t:pagelink>
+	            </li>
+            </ul>
             <p class="legal">
-                &copy;2009 com.mywebgalery. All Rights Reserved.
+                &copy;${year} My Web Gallery. All Rights Reserved.
                 &nbsp;&nbsp;&bull;&nbsp;&nbsp;
                 Design by
-                <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>
-                &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-                Icons by
-                <a href="http://famfamfam.com/">FAMFAMFAM</a>.
+                <a href="http://mywebgalery.com/">My Web Gallery</a>
             </p>
         </div>
         <!-- end footer -->
+        <div class='floatfix'></div>
     </body>
 </html>

@@ -1,0 +1,44 @@
+<html t:type="layout" title='Register'
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+	<div>
+		<t:form t:id='form'>
+			<ul>
+				<li>
+					<label>First name</label>
+					<t:textfield value="user.firstname"/>
+					<t:messages component="name"/>
+				</li>
+				<li>
+					<label>Last name</label>
+					<t:textfield value="user.lastname"/>
+					<t:messages component="lastname"/>
+				</li>
+				<li>
+					<label>Email</label>
+					<t:textfield value="user.email"/>
+					<t:messages component="email"/>
+				</li>
+				<li>
+					<label>Username</label>
+					<t:textfield value="user.name"/>
+					<t:messages component="name"/>
+				</li>
+				<li>
+					<label>Password</label>
+					<t:passwordfield value="user.pass"/>
+					<t:messages component="pass"/>
+				</li>
+				<li>
+					<label>Confirm password</label>
+					<t:passwordfield value="confirm"/>
+					<t:messages component="confirm"/>
+				</li>
+				<li>
+					<input type="submit" value="Open account"/>
+				</li>
+			</ul>
+		</t:form>
+	</div>
+</html>

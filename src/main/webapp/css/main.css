@@ -1,0 +1,336 @@
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #C5E370;
+    text-align: justify;
+    font: 15px Arial, Helvetica, sans-serif;
+    color: #444;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h1 a, h2, h2 a, h3, h3 a {
+    margin: 0;
+    text-decoration: none;
+    font-family: Tahoma, Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+}
+
+h1 {
+    letter-spacing: -1px;
+    font-size: 2em;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    letter-spacing: -1px;
+    font-size: 1.8em;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+h4 {
+    font-size: 1.15em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+
+p, ol, ul {
+    margin-bottom: 1em;
+}
+
+blockquote {
+    margin: 0 0 0 1.5em;
+    padding-left: 1em;
+    border-left: 5px solid #DDDDDD;
+}
+fieldset {border: 0 none; padding: 0px; margin: 0px;}
+a {
+    color: #446B49;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+img {border: 0 none;}
+/* Header */
+
+#header {
+    width: 950px;
+    margin: 0 auto 10px auto;
+	border: 1px solid #446B49;
+	border-top: 0 none;
+	background: #fff;
+	-moz-border-radius-bottomright: 10px; -webkit-border-bottom-right-radius: 10px; border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px; -webkit-border-bottom-left-radius: 10px; border-bottom-left-radius: 10px;
+}
+
+#logo {
+    float: left;
+    text-transform: uppercase;
+    margin: 5px 0 20px 20px;
+}
+
+#logo a {
+    text-decoration: none;
+    color: #446B49;
+    border: 0 none;
+}
+#logo img {border: 0 none;}
+
+.topmenu {
+    float: right;
+    margin: 0px 20px 20px 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid #446B49;
+    border-top: 0 none;
+	-moz-border-radius-bottomright: 10px; -webkit-border-bottom-right-radius: 10px; border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px; -webkit-border-bottom-left-radius: 10px; border-bottom-left-radius: 10px;
+    background: #C5E370;
+}
+
+.topmenu li {
+    display: block;
+    float: left;
+}
+
+.topmenu li.last a {
+	-moz-border-radius-bottomright: 10px; -webkit-border-bottom-right-radius: 10px; border-bottom-right-radius: 10px;
+}
+
+.topmenu li:first-child {
+    font-size: 1em;
+    line-height: 3em;
+    padding: 0px 20px;
+    border-right: 1px solid #446B49;
+}
+.topmenu a {
+    display: block;
+    padding: 0px 20px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: lowercase;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    line-height: 3em;
+    color: #446B49;
+}
+
+.topmenu a:hover {
+    background: #ddd;
+}
+
+/* Page */
+
+#page {
+    width: 950px;
+    margin: 0 auto 10px auto;
+}
+
+/* Content */
+
+#content {
+    float: left;
+    width: 735px;
+	-moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;
+	border: 1px solid #446B49;
+	background: #fff;
+}
+#content .title {
+    border-bottom: 1px #446B49 dashed;
+    margin: 25px;
+	margin-bottom: 0px;
+}
+
+#content .title h2 {
+    padding: 0px;
+    margin: 0px;
+    text-transform: lowercase;
+}
+
+#content .entry {
+    margin: 25px;
+}
+
+/* Sidebar */
+
+#sidebar {
+    float: right;
+    width: 200px;
+	-moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;
+	border: 1px solid #446B49;
+	background: #fff;
+}
+#sidebar a {
+	font-weight: bold;
+	text-decoration: none;
+	text-transform: lowercase;
+	line-height: 1.5em;
+	display: block;
+}
+#sidebar a:hover {
+	color: #444;
+}
+
+/* Footer */
+
+#footer {
+    width: 950px;
+    margin: 10px auto 25px auto;
+}
+
+.footermenu {
+	float: left;
+	list-style: none;
+	margin: 0 25px 10px 25px;
+	padding: 0;
+	width: 100%;
+}
+.footermenu li {
+	float: left;
+	border-left: 1px solid #446B49;
+}
+.footermenu li:first-child {
+	border-left: 0 none;
+}
+
+.footermenu a {
+	color: #446B49;
+	font-weight: bold;
+	display: block;
+	line-height: 1.2em;
+	padding: 2px 10px;
+	text-decoration: none;
+}
+.footermenu li:first-child a{padding-left: 0px}
+
+.footermenu a:hover {
+	color: #444;
+}
+
+#footer p.legal {
+    line-height: normal;
+    font-size: .9em;
+    color: #666;
+    border-top: 1px dotted #446B49;
+    clear: left;
+    padding-top: 10px;
+    margin: 0 25px;
+    text-align: center;
+}
+
+
+#footer .rss {
+    background: url( images/img18.gif ) no-repeat left center;
+}
+
+#footer .xhtml {
+    background: url( images/img19.gif ) no-repeat left center;
+}
+
+#footer .css {
+    background: url( images/img20.gif ) no-repeat left center;
+}
+
+#footer .legal a {
+    padding: 0;
+}
+
+/* Categories */
+.products_list {float:left; margin: 0; padding: 0; list-style: none; width: 100%;}
+.products_list li {float:left; clear: left; width: 100%; margin-bottom: 10px; border-bottom:1px solid #aaa;}
+
+.products_list a {text-decoration: none; border: 0 none;}
+
+.products_list .image {
+	width:100px;
+	float:left;
+	margin: 5px;
+}
+.products_list .item_content {
+	width: 450px;
+	float:left;
+	margin: 5px;
+	border-right:  1px dotted #446B49;
+}
+
+div.products_list .item_content {width: 560px;}
+.products_list .name {
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 1.5em;
+	color: #446B49;
+}
+.products_list .description {color: #666; margin: 10px 0;}
+
+.products_list .price {
+	line-height: 1.5em;
+	font-weight: bold;
+}
+
+.products_list .price strike {color: #c00;}
+
+.products_list .controls {
+	float:right;
+	width: 100px;
+ 	margin: 5px;
+}
+.products_list .controls a {
+	display: block;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 1.5em;
+	text-transform: lowercase;
+}
+
+.products_list .controls a:hover {color:#444;}
+
+ul.products_list img {
+	margin: auto;
+	display: block;
+	max-width: 100px;
+	max-height: 100px;
+}
+
+
+/* my classes*/
+.contact_text {width: 100%; height: 300px;}
+.contact_text_label {width: 100%;}
+.contact_text_submit {float: right;}
+
+.editor {width: 100%; height: 200px;clear: left;}
+
+form ul {float:left; margin: 0; padding: 0; clear: left; width: 600px;}
+form li {list-style: none; margin-bottom: 5px; padding: 2px 5px; float: left; width: 100%;}
+form label {
+	display: block;
+	float: left;
+	width: 180px;
+}
+form input, form select, form textarea {width: 400px;}
+form input[type=submit], form input[type=checkbox], form input[type=radio] {width: auto;}
+li.header {background: #626262;color: #fff;}
+tr.footer {font-weight: bold;}
+a.selected {text-decoration: none; color: #444;}
+
+.info_field {float: left; border-bottom: 1px dotted #446B49; width: 100%; margin-bottom: 10px;}
+.info_field h3 {margin-bottom: 10px;}
+.info_field label {float: left; clear: left; font-weight: bold; width: 150px; margin-right: 5px;}
+.info_field div {float:left; margin-bottom: 10px;}

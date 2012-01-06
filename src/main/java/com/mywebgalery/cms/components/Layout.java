@@ -1,47 +1,64 @@
 package com.mywebgalery.cms.components;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
-import org.apache.tapestry5.ComponentResources;
-import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.RequestGlobals;
+
+import com.mywebgalery.cms.base.BaseComponent;
 
 /**
- * Layout component for pages of application cms.
+ * Layout component for pages of application shop.
  */
-@Import(stylesheet="context:layout/layout.css")
-public class Layout
-{
-    /** The page title, for the <title> element and the <h1> element. */
-    @Property
-    @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
-    private String title;
+//@IncludeStylesheet({"context:css/base/jquery-ui.css","context:css/main.css","literal:/customcss"})
+public class Layout extends BaseComponent {
+	/** The page title, for the <title> element and the <h1>element. */
 
-    @Property
-    private String pageName;
+	public static final String[] PAGES = { "home", "about", "contact", "legal" };
 
-    @Property
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
-    private String sidebarTitle;
+	@Inject
+	private RequestGlobals _request;
 
-    @Property
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
-    private Block sidebar;
+	@Inject
+	private Messages _messages;
 
-    @Inject
-    private ComponentResources resources;
+	@Property
+	@Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
+	private String _title;
 
-    public String getClassForPageName()
-    {
-      return resources.getPageName().equalsIgnoreCase(pageName)
-             ? "current_page_item"
-             : null;
-    }
+	@Property
+	private String _page;
 
-    public String[] getPageNames()
-    {
-      return new String[] { "Index", "About", "Contact" };
-    }
+	@SuppressWarnings("unused")
+	@Property
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	private Block _sidebar;
+
+
+	private String _logo;
+
+	@OnEvent(component = "logout")
+	public Object logout() {
+		_request.getRequest().getSession(true).invalidate();
+		return "admin/index";
+	}
+
+	public String getPageName() {
+		return _messages.get("page."+_page+".name");
+	}
+
+	public String[] getPages() {
+		return PAGES;
+	}
+
+	public int getYear(){
+		return GregorianCalendar.getInstance().get(Calendar.YEAR);
+	}
 }

@@ -71,7 +71,13 @@ public class BaseComponent {
 	}
 
 	public User getUser() {
-		return getSessionData().getUser();
+		User u = getSessionData().getUser();
+		if(u==null){
+			u = new User();
+			getSessionData().setUser(u);
+		}
+
+		return u;
 	}
 
 

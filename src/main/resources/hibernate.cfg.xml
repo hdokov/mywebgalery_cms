@@ -18,32 +18,13 @@
 
 
 
-        <mapping class="com.rushmore.tickets.model.IdSourceDummy"/>
-		<mapping class="com.rushmore.tickets.model.audit.Revision"/>
+		<mapping class="com.mywebgalery.cms.model.audit.Revision"/>
+		<mapping class="com.mywebgalery.cms.model.Account"/>
+		<mapping class="com.mywebgalery.cms.model.App"/>
+		<mapping class="com.mywebgalery.cms.model.Module"/>
+		<mapping class="com.mywebgalery.cms.model.Page"/>
+		<mapping class="com.mywebgalery.cms.model.User"/>
 
-		<mapping class="com.rushmore.tickets.model.Client"/>
-		<mapping class="com.rushmore.tickets.model.Order"/>
-		<mapping class="com.rushmore.tickets.model.OrderRequest"/>
-		<mapping class="com.rushmore.tickets.model.Report"/>
-		<mapping class="com.rushmore.tickets.model.Location"/>
-		<mapping class="com.rushmore.tickets.model.Sector"/>
-		<mapping class="com.rushmore.tickets.model.Seat"/>
-		<mapping class="com.rushmore.tickets.model.EventActivity"/>
-		<mapping class="com.rushmore.tickets.model.Ticket"/>
-
-
-        <mapping class="com.rushmore.user.db.Action"/>
-        <mapping class="com.rushmore.user.db.Resource"/>
-        <mapping class="com.rushmore.user.db.Role"/>
-        <mapping class="com.rushmore.user.db.RoleContainer"/>
-        <mapping class="com.rushmore.user.db.User"/>
-        <mapping class="com.rushmore.user.db.UserGroup"/>
-
- 		<mapping class="com.rushmore.events.persist.Activity"/>
- 		<mapping class="com.rushmore.events.persist.Event"/>
-
-  		<mapping class="com.rushmore.mail.persist.Email"/>
-  		<mapping class="com.rushmore.mail.persist.EmailLog"/>
 
 		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-insert"/>
 		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-update"/>

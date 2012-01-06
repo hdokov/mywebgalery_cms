@@ -185,7 +185,8 @@ public class AppModule
 	}
 
 	public void contributeBeanBlockSource(Configuration<BeanBlockContribution> configuration) {
-	    configuration.add(new DisplayBlockContribution("module.login", "DisplayBlocks", "login"));
+	    configuration.add(new DisplayBlockContribution("module.login", "modules/DisplayBlocks", "login"));
+	    configuration.add(new DisplayBlockContribution("tst", "modules/DisplayBlocks", "val"));
 	    //configuration.add(new DisplayBlockContribution("date", "DisplayBlocks", "datedisplay"));
 	    //configuration.add(new DisplayBlockContribution("datecol", "DisplayBlocks", "datedisplay"));
 	}

@@ -28,13 +28,13 @@ import com.mywebgalery.cms.utils.StringUtils;
 @MappedSuperclass
 public class Model<T extends Model<?>>  {
 
-	private static final Logger LOG = LoggerFactory.getLogger(Model.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(Model.class);
 	private static final Map<Class<?>, List<String>> _propertyNamesList = new HashMap<Class<?>, List<String>>();
 	private static final Map<Class<?>, String> _propertyNames = new HashMap<Class<?>, String>();
 
 	@Id @Column(columnDefinition="bigserial")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+	protected long id;
 
 	@Column(columnDefinition="timestamp without time zone")
 	protected Date created;
@@ -156,9 +156,9 @@ public class Model<T extends Model<?>>  {
 
 
 	// DAO METHODS
-	public void delete(Session s, T entity) throws Exception {
+	public void delete(Session s) throws Exception {
 		try {
-			s.delete(entity);
+			s.delete(this);
 		} catch (Exception e) {
 			throw new Exception("Cannot execute querry", e);
 		}
@@ -188,31 +188,28 @@ public class Model<T extends Model<?>>  {
 		return result;
 	}
 
-	public T save(Session s, T entity) throws EntityExistsException, Exception {
+	public void save(Session s) throws EntityExistsException, Exception {
 		try {
-			s.save(entity);
+			s.save(this);
 		} catch (Exception e) {
 			throw new Exception("Cannot execute querry", e);
 		}
-		return entity;
 	}
 
-	public T saveOrUpdate(Session s, T entity) throws Exception {
+	public void saveOrUpdate(Session s) throws Exception {
 		try {
-			s.saveOrUpdate(entity);
+			s.saveOrUpdate(this);
 		} catch (Exception e) {
 			throw new Exception("Cannot execute querry", e);
 		}
-		return entity;
 	}
 
-	public T update(Session s, T entity) throws EntityNotFoundException, Exception {
+	public void update(Session s) throws EntityNotFoundException, Exception {
 		try {
-			s.update(entity);
+			s.update(this);
 		} catch (Exception e) {
 			throw new Exception("Cannot execute querry", e);
 		}
-		return entity;
 	}
 
 	public int deleteById(Session s, Long id) throws EntityNotFoundException, Exception {

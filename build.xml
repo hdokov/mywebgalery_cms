@@ -1,0 +1,33 @@
+<project name="tickets" default="schemaexport" basedir=".">
+	<path id="project.cp">
+		<pathelement path="./target/classes"/>
+        <fileset refid="jars"/>
+    </path>
+	<fileset id="jars" dir="./target/dependency">
+        <include name="**/*.jar"/>
+    </fileset>
+	<fileset id="jar" dir="./target">
+        <include name="cms.jar"/>
+    </fileset>
+	<target name="schemaexport"
+	  description="Exports a generated schema to DB and file">
+	  <taskdef name="hibernatetool"
+	    classname="org.hibernate.tool.ant.EnversHibernateToolTask"
+	    classpathref="project.cp"/>
+
+	  <hibernatetool destdir=".">
+	  	<classpath>
+	  		<pathelement path="./target/classes"/>
+	        <fileset refid="jars"/>
+	  	</classpath>
+	    <annotationconfiguration configurationfile="./src/main/resources/hibernate.cfg.xml"/>
+	    <hbm2ddl
+	      drop="false"
+	      create="true"
+	      export="false"
+	      outputfilename="schema.sql"
+	      delimiter=";"
+	      format="true"/>
+	  </hibernatetool>
+	</target>
+</project>

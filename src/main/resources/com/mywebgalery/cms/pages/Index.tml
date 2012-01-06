@@ -19,6 +19,9 @@
 
 	<t:block id='header'>
 		header
+		<t:loop t:source='tests' t:value='test'>
+			<t:delegate to='prop:block' />
+		</t:loop>
 	</t:block>
 
 	<t:block id='subheader'>
