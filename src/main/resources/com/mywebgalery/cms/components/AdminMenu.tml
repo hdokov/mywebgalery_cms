@@ -2,9 +2,9 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 	<ul class='menu'>
-		<li><t:pagelink page="admin/myprofile">${message:label.myprofile}</t:pagelink></li>
+		<li><t:pagelink page="admin/myprofile">${message:label.my_profile}</t:pagelink></li>
 		<li><t:pagelink page="admin/apps">${message:label.apps}</t:pagelink></li>
-		<li><t:pagelink page="admin/users">${message:label.users}</t:pagelink></li>
+		<li><t:pagelink page="admin/account">${message:label.my_account}</t:pagelink></li>
 	</ul>
 
 </t:content>

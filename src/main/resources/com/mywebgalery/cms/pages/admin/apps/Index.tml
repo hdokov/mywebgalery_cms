@@ -1,9 +1,16 @@
-<html t:type="layout" title='Home'
+<html t:type="layout" title='message:title.my_apps'
 	  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
 
-	apps
+	<div>
+		<ul>
+			<li t:type='loop' t:source='apps' t:value='app'>
+				<h3>${app.title}</h3>
+			</li>
+		</ul>
+		<a t:type='pagelink' t:page='admin/apps/edit' t:context="literal:new">${message:label.add_new_app}</a>
+	</div>
 
 	<p:sidebar>
 		<t:adminmenu />

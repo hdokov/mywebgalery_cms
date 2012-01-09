@@ -58,4 +58,11 @@ public class App extends Model<App>{
 	}
 
 
+	// DAO
+
+	private static final App INSTANCE = new App();
+	public static App getInstance(){
+		return INSTANCE;
+	}
+
 }

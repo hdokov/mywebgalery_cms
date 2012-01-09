@@ -1,4 +1,4 @@
-package com.mywebgalery.cms.pages.admin.users;
+package com.mywebgalery.cms.pages.admin.account;
 
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
