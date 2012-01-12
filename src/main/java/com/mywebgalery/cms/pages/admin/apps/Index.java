@@ -15,6 +15,7 @@ public class Index extends BasePage{
 
 	private List<App> _apps;
 
+	@SuppressWarnings("unused")
 	@Property
 	private App _app;
 
@@ -39,6 +40,18 @@ public class Index extends BasePage{
 		return _apps;
 	}
 
+	@OnEvent(component="delapp")
+	public void delete(Long id){
+		try {
+			Session s = getTransactionManager().getSession();
+			s.beginTransaction();
+			App.getInstance().deleteById(s, id);
+			s.flush();
+		} catch (Exception e) {
+			getLog().error(e.getMessage(),e);
+			addErrMsg(translate("error.cannot_delete_app"), null);
+		}
+	}
 
 
 }

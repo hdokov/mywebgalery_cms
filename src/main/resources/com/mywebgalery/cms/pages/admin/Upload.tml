@@ -1,0 +1,11 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<body>
+	<div id="error">${error}</div>
+	<t:form t:id='form'>
+		<t:hidden value='type' />
+		<t:hidden value='size' />
+		<t:hidden value='id' />
+		<input t:id="file" t:type="upload" />
+	</t:form>
+</body>
+</html>

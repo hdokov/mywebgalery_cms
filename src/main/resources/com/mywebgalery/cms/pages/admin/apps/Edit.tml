@@ -1,4 +1,4 @@
-<html t:type="layout" title='message:title.my_apps'
+<html t:type="layout" title='prop:title'
 	  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
@@ -7,27 +7,28 @@
 		<t:form t:id='form'>
 			<ul>
 				<li>
-					<label>Display Name</label>
+					<label>${message:label.title}</label>
 					<t:textfield value="app.title"/>
 					<t:messages component="title"/>
 				</li>
 				<li>
-					<label>Subdomain</label>
+					<label>${message:label.subdomain}</label>
 					<t:textfield value="app.name"/>
 					<t:messages component="name"/>
 				</li>
 				<li>
-					<label>Description</label>
+					<label>${message:label.descr}</label>
 					<t:textarea value="app.descr"/>
 					<t:messages component="descr"/>
 				</li>
 				<li>
-					<label>Keywords</label>
+					<label>${message:label.keywords}</label>
 					<t:textarea value="app.keywords"/>
 					<t:messages component="keywords"/>
 				</li>
 				<li>
-					<input type="submit" value="Submit"/>
+					<input type="submit" value="${message:label.save}"/>
+					<input type="submit" value="${message:label.cancel}" name='cancel'/>
 				</li>
 			</ul>
 		</t:form>

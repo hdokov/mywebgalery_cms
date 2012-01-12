@@ -6,11 +6,11 @@ import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.hibernate.Session;
 
-import com.mywebgalery.cms.base.BasePage;
+import com.mywebgalery.cms.base.AdminBasePage;
 import com.mywebgalery.cms.model.App;
 import com.mywebgalery.cms.utils.StringUtils;
 
-public class Edit extends BasePage{
+public class Edit extends AdminBasePage{
 
 	@Property @Persist
 	private App _app;
@@ -40,8 +40,16 @@ public class Edit extends BasePage{
 		return null;
 	}
 
+	public String getTitle(){
+		return _app.getId() == 0 ? translate("header.new_app") : translate("header.edit_app");
+	}
+
 	@OnEvent(component="form")
 	public Object submit(){
+		if(getRequest().getRequest().getParameter("cancel") != null){
+			_app = null;
+			return Index.class;
+		}
 		try {
 			if(StringUtils.isBlank(_app.getName()))
 				addErrMsg(translate("error.name_required"), "name");
@@ -59,6 +67,7 @@ public class Edit extends BasePage{
 			s.beginTransaction();
 			_app.saveOrUpdate(s);
 
+			_app = null;
 			addSucMsg(translate("message.app_saved"), null);
 			return Index.class;
 		} catch (Exception e) {
