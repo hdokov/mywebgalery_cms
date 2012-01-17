@@ -34,26 +34,13 @@
         id  bigserial not null,
         created timestamp without time zone,
         updated timestamp without time zone,
+        appId int8 not null,
         content text,
         data text,
-        pageId int8 not null,
-        position text,
+        descr text,
+        name text,
         type text,
         primary key (id)
-    );
-
-    create table modules_AUD (
-        id bigserial not null,
-        REV int8 not null,
-        REVTYPE int2,
-        created timestamp without time zone,
-        updated timestamp without time zone,
-        content text,
-        data text,
-        pageId int8,
-        position text,
-        type text,
-        primary key (id, REV)
     );
 
     create table pages (
@@ -66,20 +53,6 @@
         type text,
         url text,
         primary key (id)
-    );
-
-    create table pages_AUD (
-        id bigserial not null,
-        REV int8 not null,
-        REVTYPE int2,
-        created timestamp without time zone,
-        updated timestamp without time zone,
-        appId int8,
-        templateId int8,
-        title text,
-        type text,
-        url text,
-        primary key (id, REV)
     );
 
     create table users (
@@ -104,45 +77,5 @@
         zip text,
         primary key (id)
     );
-
-    create table users_AUD (
-        id bigserial not null,
-        REV int8 not null,
-        REVTYPE int2,
-        created timestamp without time zone,
-        updated timestamp without time zone,
-        accountId int8,
-        address text,
-        admin bool,
-        city text,
-        country text,
-        email text,
-        firstname text,
-        lastLoginAdmin timestamp without time zone,
-        lastLoginUser timestamp without time zone,
-        lastname text,
-        name text,
-        pass text,
-        phone text,
-        privileges varchar(255),
-        token text,
-        zip text,
-        primary key (id, REV)
-    );
-
-    alter table modules_AUD 
-        add constraint FKB9D839D8C8D60174 
-        foreign key (REV) 
-        references audits;
-
-    alter table pages_AUD 
-        add constraint FK35BE9B95C8D60174 
-        foreign key (REV) 
-        references audits;
-
-    alter table users_AUD 
-        add constraint FK154C77D9C8D60174 
-        foreign key (REV) 
-        references audits;
 
     create sequence hibernate_sequence;

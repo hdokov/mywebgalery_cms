@@ -9,12 +9,11 @@ import javax.persistence.Table;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.envers.Audited;
 
 import com.mywebgalery.cms.utils.StringUtils;
 
 @Entity
-@Audited
+//@Audited
 @Table(name="users")
 public class User extends Model<User> {
 

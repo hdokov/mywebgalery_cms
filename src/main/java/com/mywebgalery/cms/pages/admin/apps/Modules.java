@@ -10,46 +10,54 @@ import org.hibernate.Session;
 
 import com.mywebgalery.cms.base.AdminBasePage;
 import com.mywebgalery.cms.model.App;
+import com.mywebgalery.cms.model.Module;
 
-public class Index extends AdminBasePage {
+public class Modules extends AdminBasePage {
 
-	private List<App> _apps;
+	private List<Module> _modules;
 
 	@SuppressWarnings("unused")
 	@Property
+	private Module _module;
+
 	private App _app;
 
 	@OnEvent(value=EventConstants.ACTIVATE)
-	public void activate(Object... params){
-
+	public Object activate(Object... params){
+		_app = (App)getSessionData().get("current_app");
+		if(_app == null){
+			addErrMsg(translate("error.select_app"), null);
+			return Index.class;
+		}
+		return null;
 	}
 
-	public List<App> getApps() {
-		if(_apps == null){
+	public List<Module> getModules() {
+		if(_modules == null){
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_apps = App.getInstance().findByProperty(s, false, "accountId", getUser().getAccountId());
+				_modules = Module.getInstance().findByProperty(s, false, "appId", _app.getId());
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);
 				addErrMsg(e.getMessage(), null);
 			}
-			if(_apps == null)
-				_apps = new ArrayList<App>();
+			if(_modules == null)
+				_modules = new ArrayList<Module>();
 		}
-		return _apps;
+		return _modules;
 	}
 
-	@OnEvent(component="delapp")
+	@OnEvent(component="delmodule")
 	public void delete(Long id){
 		try {
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
-			App.getInstance().deleteById(s, id);
+			Module.getInstance().deleteById(s, id);
 			s.flush();
 		} catch (Exception e) {
 			getLog().error(e.getMessage(),e);
-			addErrMsg(translate("error.cannot_delete_app"), null);
+			addErrMsg(translate("error.cannot_delete_module"), null);
 		}
 	}
 

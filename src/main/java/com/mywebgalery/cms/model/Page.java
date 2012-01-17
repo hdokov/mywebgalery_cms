@@ -4,12 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.envers.Audited;
-
 
 @Entity
 @Table(name="pages")
-@Audited
+//@Audited
 public class Page extends Model<Page> {
 
 	private long appId;

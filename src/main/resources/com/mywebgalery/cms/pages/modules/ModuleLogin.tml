@@ -1,0 +1,18 @@
+<t:content xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<t:block id='view'>
+	<div class="login_form">
+		<form t:type='form' t:id='loginform'>
+			<t:label for='username'>${message:label.email}</t:label>
+			<input t:id='username' t:type='textfield' t:value='username'/>
+			<t:label for='password'>${message:label.password}</t:label>
+			<input t:id ='password' t:type='password' t:value='password'/>
+			<input type="submit" value='${val}' />
+		</form>
+	</div>
+</t:block>
+<t:block id='edit'>
+</t:block>
+
+</t:content>

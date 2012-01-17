@@ -4,9 +4,12 @@
 <t:block id='login'>
 	<form t:type='form' t:id='loginform'>
 		<input t:type='textfield' t:value='username'/>
-		<input type="submit" value='login' />
-
+		<input type="submit" value='${val}' />
+		<input type="hidden" name='test' value='${val}'/>
 	</form>
+</t:block>
+<t:block id='val'>
+	${val}
 </t:block>
 
 </t:content>

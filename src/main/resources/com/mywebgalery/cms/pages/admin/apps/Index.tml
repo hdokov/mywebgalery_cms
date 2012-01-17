@@ -16,6 +16,7 @@
    			<div class="controls">
 				<a t:type='pagelink' t:page='admin/apps/edit' t:context="app.id">${message:label.edit_app}</a>
    				<t:actionlink t:id='delapp' t:context="app.id"  onclick="return confirm('${message:message.confirm_app_delete}');">${message:label.delete}</t:actionlink>
+				<a t:type='pagelink' t:page='admin/apps/contents' t:context="app.id">${message:label.contents}</a>
 			</div>
 		</li>
 	</ul>

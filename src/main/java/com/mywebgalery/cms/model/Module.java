@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.envers.Audited;
-
 /**
  *
  * @author ican
@@ -13,18 +11,23 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Table(name="modules")
-@Audited
+//@Audited
 public class Module extends Model<Module> {
 
 	/**
 	 * The page this module belongs to
 	 */
-	private long pageId;
+	private long appId;
 
 	/**
-	 * The name of the block in which this module will be rendered
+	 * The display name of the module
 	 */
-	@Column(columnDefinition="text") private String position;
+	@Column(columnDefinition="text") private String name;
+
+	/**
+	 * Description of the module
+	 */
+	@Column(columnDefinition="text") private String descr;
 
 	/**
 	 * The name of the <code>DisplayBlockContribution</code> this module will render.
@@ -43,17 +46,17 @@ public class Module extends Model<Module> {
 	@Column(columnDefinition="text") private String content;
 
 
-	public long getPageId() {
-		return pageId;
+	public long getAppId() {
+		return appId;
 	}
-	public void setPageId(long pageId) {
-		this.pageId = pageId;
+	public void setAppId(long appId) {
+		this.appId = appId;
 	}
-	public String getPosition() {
-		return position;
+	public String getName() {
+		return name;
 	}
-	public void setPosition(String position) {
-		this.position = position;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getType() {
 		return type;
@@ -72,6 +75,19 @@ public class Module extends Model<Module> {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getDescr() {
+		return descr;
+	}
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
+
+	// DAO
+
+	private static final Module INSTANCE = new Module();
+	public static Module getInstance(){
+		return INSTANCE;
 	}
 
 

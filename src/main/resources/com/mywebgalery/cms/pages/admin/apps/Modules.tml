@@ -1,0 +1,28 @@
+<html t:type="layout" title='message:header.my_apps'
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<ul class="products_list">
+		<li t:type='loop' t:source='modules' t:value='module'>
+  			<div class="image">
+				<img src="" />
+  			</div>
+  			<div class="item_content">
+	   			<div class="name">${module.name}</div>
+	   			<div class="description">${module.descr}</div>
+	   			<!-- div class="price"><t:outputraw value="price" /></div-->
+   			</div>
+   			<div class="controls">
+				<a t:type='pagelink' t:page='admin/apps/editmodule' t:context="app.id">${message:label.edit}</a>
+   				<t:actionlink t:id='delapp' t:context="app.id"  onclick="return confirm('${message:message.confirm_module_delete}');">${message:label.delete}</t:actionlink>
+			</div>
+		</li>
+	</ul>
+	<a t:type='pagelink' t:page='admin/apps/editmodule' t:context="literal:new">${message:label.add_new_module}</a>
+
+	<p:sidebar>
+		<t:adminmenu />
+	</p:sidebar>
+
+</html>
