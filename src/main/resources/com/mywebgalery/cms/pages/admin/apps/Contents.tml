@@ -17,7 +17,7 @@
 
 	<ul>
 		<li><h3>Modules</h3></li>
-		<li>Logo</li>
+		<li><a t:type='pagelink' t:page='admin/apps/modules'>${message:label.modules}</a></li>
 		<li>Theme</li>
 	</ul>
 

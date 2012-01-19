@@ -55,7 +55,7 @@ public class AppModule {
 		// the first locale name is the default when there's no reasonable
 		// match).
 
-		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
+		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "bg,en");
 
 		// The factory default is true but during the early stages of an
 		// application
@@ -201,6 +201,10 @@ public class AppModule {
 
 
 	// MODULES
+    public void contributeComponentMessagesSource(OrderedConfiguration<String> configuration) {
+    	configuration.add("BaseComponent","/conf/modules");
+    }
+
 	public static ModulesSourceService buildFileServicerDispatcher(Map<String, ModuleDescriptor> contributions) {
 		return new ModulesSourceService(contributions);
 	}
