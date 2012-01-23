@@ -22,7 +22,7 @@ public class ModuleDescriptor implements Comparable<ModuleDescriptor> {
 	public ModuleDescriptor(){}
 
 	public ModuleDescriptor(String displayName, String type){
-		this(displayName, type, type+".name");
+		this(displayName, type, type);
 	}
 
 	public ModuleDescriptor(String displayName, String type, String nameKey){

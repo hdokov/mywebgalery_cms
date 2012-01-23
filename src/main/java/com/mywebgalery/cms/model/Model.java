@@ -168,7 +168,7 @@ public class Model<T extends Model<?>>  {
 	public T findById(Session s, Long id) throws EntityNotFoundException, Exception {
 		T result = null;
 		try {
-			result = (T) s.load(getClass(), id);
+			result = (T) s.get(getClass(), id);
 		} catch (Exception e) {
 			throw new Exception("Cannot execute querry", e);
 		}

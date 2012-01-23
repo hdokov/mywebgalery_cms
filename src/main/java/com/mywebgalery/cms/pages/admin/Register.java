@@ -10,7 +10,6 @@ import org.hibernate.Session;
 import com.mywebgalery.cms.base.BasePage;
 import com.mywebgalery.cms.model.Account;
 import com.mywebgalery.cms.model.User;
-import com.mywebgalery.cms.utils.MailSender;
 import com.mywebgalery.cms.utils.StringUtils;
 
 public class Register extends BasePage {

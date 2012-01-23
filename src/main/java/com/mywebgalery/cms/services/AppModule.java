@@ -11,8 +11,10 @@ import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.services.ApplicationStateContribution;
 import org.apache.tapestry5.services.ApplicationStateCreator;
 import org.apache.tapestry5.services.BeanBlockContribution;
@@ -201,8 +203,8 @@ public class AppModule {
 
 
 	// MODULES
-    public void contributeComponentMessagesSource(OrderedConfiguration<String> configuration) {
-    	configuration.add("BaseComponent","/conf/modules");
+    public void contributeComponentMessagesSource(OrderedConfiguration<Resource> configuration,@Value("conf/modules.properties")Resource catalog) {
+    	configuration.add("BaseComponent",catalog);
     }
 
 	public static ModulesSourceService buildFileServicerDispatcher(Map<String, ModuleDescriptor> contributions) {
@@ -218,10 +220,10 @@ public class AppModule {
 	public void contributeBeanBlockSource(Configuration<BeanBlockContribution> configuration) {
 		configuration.add(new DisplayBlockContribution("module.login", "modules/ModuleLogin", "view"));
 		configuration.add(new EditBlockContribution("module.login", "modules/ModuleLogin", "edit"));
-		configuration.add(new DisplayBlockContribution("module.html", "modules/ModuleLogin", "view"));
-		configuration.add(new EditBlockContribution("module.html", "modules/ModuleLogin", "edit"));
-		configuration.add(new DisplayBlockContribution("module.menu", "modules/ModuleLogin", "view"));
-		configuration.add(new EditBlockContribution("module.menu", "modules/ModuleLogin", "edit"));
+		configuration.add(new DisplayBlockContribution("module.html", "modules/ModuleHtml", "view"));
+		configuration.add(new EditBlockContribution("module.html", "modules/ModuleHtml", "edit"));
+		configuration.add(new DisplayBlockContribution("module.menu", "modules/ModuleMenu", "view"));
+		configuration.add(new EditBlockContribution("module.menu", "modules/ModuleMenu", "edit"));
 	}
 
 }

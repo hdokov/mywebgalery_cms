@@ -7,8 +7,15 @@
 
 <t:block id='edit'>
 	<form t:type='form' t:id='htmlform'>
-		<input t:type='textarea' t:value='html'/>
-		<input type="submit" value='${val}' />
+		<label>${message:label.name}</label>
+		<input t:type='textfield' t:value='module.name' />
+		<label>${message:label.descr}</label>
+		<input t:type='textfield' t:value='module.descr' />
+		<label>${message:label.html}</label>
+		<input t:type='textarea' t:value='module.content'/>
+		<div class="floatfix"></div>
+		<input type="submit" name='save' value='${message:label.save}' />
+		<input type="submit" name='cancel' value='${message:label.cancel}' />
 	</form>
 </t:block>
 

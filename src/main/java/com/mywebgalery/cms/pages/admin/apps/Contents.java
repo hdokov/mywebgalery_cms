@@ -19,7 +19,7 @@ public class Contents extends AdminBasePage {
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_app = App.getInstance().findById(s, Long.parseLong(params[0].toString()));
+				_app = App.getInstance().get(s, Long.parseLong(params[0].toString()));
 				s.evict(_app);
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);

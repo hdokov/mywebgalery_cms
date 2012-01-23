@@ -5,9 +5,11 @@ import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
+import org.hibernate.Session;
 
 import com.mywebgalery.cms.base.BasePage;
 import com.mywebgalery.cms.model.Module;
+import com.mywebgalery.cms.pages.admin.apps.Modules;
 
 public class ModuleLogin extends BasePage {
 
@@ -30,7 +32,25 @@ public class ModuleLogin extends BasePage {
 		}
 	}
 
-	public String getVal(){
-		return context==null ? "null" : context.getData();
+	@OnEvent(component="form")
+	public Object submit(){
+		try {
+			if(getRequest().getRequest().getParameter("cancel")!=null){
+				getTransactionManager().rollback();
+			} else {
+				Session s = getTransactionManager().getSession();
+				s.beginTransaction();
+				context.saveOrUpdate(s);
+			}
+			return Modules.class;
+		} catch (Exception e) {
+			getLog().error(e.getMessage(),e);
+			addErrMsg(e.getMessage(), null);
+		}
+		return null;
+	}
+
+	public Module getModule() {
+		return context;
 	}
 }

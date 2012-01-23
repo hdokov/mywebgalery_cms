@@ -1,15 +1,21 @@
 <t:content xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-<t:block id='login'>
-	<form t:type='form' t:id='loginform'>
-		<input t:type='textfield' t:value='username'/>
-		<input type="submit" value='${val}' />
-		<input type="hidden" name='test' value='${val}'/>
-	</form>
+<t:block id='view'>
+	<ul class='menu'>
+		<li><a t:type='pagelink' t:page='index'>Home</a></li>
+	</ul>
 </t:block>
-<t:block id='val'>
-	${val}
+<t:block id='edit'>
+	<form t:type='form' t:id='form'>
+		<label>${message:label.name}</label>
+		<input t:type='textfield' t:value='module.name' />
+		<label>${message:label.descr}</label>
+		<input t:type='textfield' t:value='module.descr' />
+		<div class="floatfix"></div>
+		<input type="submit" name='save' value='${message:label.save}' />
+		<input type="submit" name='cancel' value='${message:label.cancel}' />
+	</form>
 </t:block>
 
 </t:content>

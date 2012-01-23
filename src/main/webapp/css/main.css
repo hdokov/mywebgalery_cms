@@ -68,6 +68,19 @@ a:hover {
 }
 
 img {border: 0 none;}
+
+.b { font-weight: bold; }
+.fl { float: left; }
+.fr { float: right; }
+.cl { clear: left; }
+.cr { clear: right; }
+.left { text-align: left; }
+.right { text-align: right; }
+.center { text-align: center; }
+.green {color:#69B032;}
+.blue {color:#0093D0;}
+.red {color:red;}
+
 /* Header */
 
 #header {

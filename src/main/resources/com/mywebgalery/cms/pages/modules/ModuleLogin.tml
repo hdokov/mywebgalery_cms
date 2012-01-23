@@ -7,12 +7,21 @@
 			<t:label for='username'>${message:label.email}</t:label>
 			<input t:id='username' t:type='textfield' t:value='username'/>
 			<t:label for='password'>${message:label.password}</t:label>
-			<input t:id ='password' t:type='password' t:value='password'/>
-			<input type="submit" value='${val}' />
+			<input t:id ='password' t:type='passwordfield' t:value='password'/>
+			<input type="submit" value='${message:label.login}' />
 		</form>
 	</div>
 </t:block>
 <t:block id='edit'>
+	<form t:type='form' t:id='form'>
+		<label>${message:label.name}</label>
+		<input t:type='textfield' t:value='module.name' />
+		<label>${message:label.descr}</label>
+		<input t:type='textfield' t:value='module.descr' />
+		<div class="floatfix"></div>
+		<input type="submit" name='save' value='${message:label.save}' />
+		<input type="submit" name='cancel' value='${message:label.cancel}' />
+	</form>
 </t:block>
 
 </t:content>

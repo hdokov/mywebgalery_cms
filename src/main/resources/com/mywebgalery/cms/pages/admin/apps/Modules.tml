@@ -15,11 +15,12 @@
    			</div>
    			<div class="controls">
 				<a t:type='pagelink' t:page='admin/apps/editmodule' t:context="module.id">${message:label.edit}</a>
-   				<t:actionlink t:id='delapp' t:context="module.id"  onclick="return confirm('${message:message.confirm_module_delete}');">${message:label.delete}</t:actionlink>
+   				<t:actionlink t:id='delmodule' t:context="module.id"  onclick="return confirm('${message:message.confirm_module_delete}');">${message:label.delete}</t:actionlink>
 			</div>
 		</li>
 	</ul>
 	<a t:type='pagelink' t:page='admin/apps/newmodule' t:context="literal:new">${message:label.add_new_module}</a>
+	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
 
 	<p:sidebar>
 		<t:adminmenu />
