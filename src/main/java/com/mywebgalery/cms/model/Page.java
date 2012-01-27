@@ -18,8 +18,10 @@ public class Page extends Model<Page> {
 	private String url;
 	@Column(columnDefinition="text")
 	private String type;
+	@Column(columnDefinition="text")
+	private String content;
 
-	private Long templateId;
+	private Long parentPage;
 
 
 	public String getTitle() {
@@ -54,15 +56,20 @@ public class Page extends Model<Page> {
 		this.appId = appId;
 	}
 
-	public Long getTemplateId() {
-		return templateId;
+	public String getContent() {
+		return content;
 	}
 
-	public void setTemplateId(Long templateId) {
-		this.templateId = templateId;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public boolean isTemplate(){
-		return templateId == null;
+	public Long getParentPage() {
+		return parentPage;
 	}
+
+	public void setParentPage(Long parentPage) {
+		this.parentPage = parentPage;
+	}
+
 }

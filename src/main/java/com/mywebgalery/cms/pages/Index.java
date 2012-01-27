@@ -1,7 +1,15 @@
 package com.mywebgalery.cms.pages;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Locale;
+
+import org.apache.tapestry5.Asset2;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.CleanupRender;
+import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.Environment;
@@ -27,8 +35,61 @@ public class Index extends BasePage {
 		return "title string";
 	}
 
-	public String getTemplate(){
-		return String.format("context:templates/%s/template.html", _theme);
+	public Asset2 getTemplate(){
+		return new Asset2() {
+
+			public String toClientURL() {
+				return null;
+			}
+
+			public Resource getResource() {
+				return new Resource() {
+
+					private String template = "<div><div id='param:header'></div>test template <div id='param:left'></div></div>";
+
+					public Resource withExtension(String extension) {
+						return this;
+					}
+
+					public URL toURL() {
+						return null;
+					}
+
+					public InputStream openStream() throws IOException {
+						return new ByteArrayInputStream(template.getBytes());
+					}
+
+					public String getPath() {
+						return null;
+					}
+
+					public String getFolder() {
+						return null;
+					}
+
+					public String getFile() {
+						return null;
+					}
+
+					public Resource forLocale(Locale locale) {
+						return this;
+					}
+
+					public Resource forFile(String relativePath) {
+						return this;
+					}
+
+					public boolean exists() {
+						return true;
+					}
+				};
+			}
+
+			public boolean isInvariant() {
+				return false;
+			}
+		};
+		//return String.format("context:templates/%s/template.html", _theme);
 	}
 	public String getTemplateCss(){
 		return String.format("/templates/%s/template.css", _theme);
@@ -63,6 +124,6 @@ public class Index extends BasePage {
 
 	@CleanupRender
 	public void clean(){
-		_environment.pop(Module.class);
+		//_environment.pop(Module.class);
 	}
 }
