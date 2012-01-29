@@ -19,7 +19,7 @@
 			</div>
 		</li>
 	</ul>
-	<a t:type='pagelink' t:page='admin/apps/newmodule' t:context="literal:new">${message:label.add_new_module}</a>
+	<a t:type='pagelink' t:page='admin/apps/newmodule'>${message:label.add_new_module}</a>
 	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
 
 	<p:sidebar>

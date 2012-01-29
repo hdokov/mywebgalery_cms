@@ -4,21 +4,11 @@
       xmlns:p="tapestry:parameter">
 
 	<ul>
-		<li><h3>Design</h3></li>
 		<li>Logo</li>
-		<li>Theme</li>
-	</ul>
-
-	<ul>
-		<li><h3>Pages</h3></li>
-		<li>Logo</li>
-		<li>Theme</li>
-	</ul>
-
-	<ul>
-		<li><h3>${message:label.modules}</h3></li>
+		<li>Design</li>
+		<li>Assets</li>
+		<li><a t:type='pagelink' t:page='admin/apps/pages'>${message:label.pages}</a></li>
 		<li><a t:type='pagelink' t:page='admin/apps/modules'>${message:label.modules}</a></li>
-		<li>Theme</li>
 	</ul>
 
 	<p:sidebar>

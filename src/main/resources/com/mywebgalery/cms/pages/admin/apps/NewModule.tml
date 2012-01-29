@@ -18,6 +18,7 @@
 			</div>
 		</li>
 	</ul>
+	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
 
 	<p:sidebar>
 		<t:adminmenu />

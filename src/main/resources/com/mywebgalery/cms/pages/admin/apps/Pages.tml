@@ -1,25 +1,39 @@
-<html t:type="layout" title='message:header.modules'
+<html t:type="layout" title='message:header.pages'
 	  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
 
 	<ul class="products_list">
-		<li t:type='loop' t:source='modules' t:value='module'>
+		<li>
   			<div class="image">
 				<img src="" />
   			</div>
   			<div class="item_content">
-	   			<div class="name">${module.name}</div>
-	   			<div class="description">${module.descr}</div>
+	   			<div class="name">${message:label.page_wrap}</div>
+	   			<div class="description"></div>
 	   			<!-- div class="price"><t:outputraw value="price" /></div-->
    			</div>
    			<div class="controls">
-				<a t:type='pagelink' t:page='admin/apps/editmodule' t:context="module.id">${message:label.edit}</a>
-   				<t:actionlink t:id='delmodule' t:context="module.id"  onclick="return confirm('${message:message.confirm_module_delete}');">${message:label.delete}</t:actionlink>
+				<a t:type='pagelink' t:page='admin/apps/editwrap'>${message:label.edit}</a>
+			</div>
+		</li>
+		<li t:type='loop' t:source='pages' t:value='page'>
+  			<div class="image">
+				<img src="" />
+  			</div>
+  			<div class="item_content">
+	   			<div class="name">${page.title}</div>
+	   			<div class="description">${category}</div>
+	   			<!-- div class="price"><t:outputraw value="price" /></div-->
+   			</div>
+   			<div class="controls">
+				<a t:type='pagelink' t:page='admin/apps/editpages' t:context="page.id">${message:label.edit}</a>
+   				<t:actionlink t:id='del' t:context="page.id"  onclick="return confirm('${message:message.confirm_page_delete}');">${message:label.delete}</t:actionlink>
+   				<t:actionlink t:id='default' t:context="page.id"  onclick="return confirm('${message:message.confirm_default_page}');">${message:label.default}</t:actionlink>
 			</div>
 		</li>
 	</ul>
-	<a t:type='pagelink' t:page='admin/apps/newmodule' t:context="literal:new">${message:label.add_new_module}</a>
+	<a t:type='pagelink' t:page='admin/apps/editpages' t:context="literal:new">${message:label.add_new_page}</a>
 	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
 
 	<p:sidebar>

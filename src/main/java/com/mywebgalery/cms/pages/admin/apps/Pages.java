@@ -10,15 +10,15 @@ import org.hibernate.Session;
 
 import com.mywebgalery.cms.base.AdminBasePage;
 import com.mywebgalery.cms.model.App;
-import com.mywebgalery.cms.model.Module;
+import com.mywebgalery.cms.model.Page;
 
 public class Pages extends AdminBasePage {
 
-	private List<Module> _modules;
+	private List<Page> _pages;
 
 	@SuppressWarnings("unused")
 	@Property
-	private Module _module;
+	private Page _page;
 
 	private App _app;
 
@@ -32,28 +32,28 @@ public class Pages extends AdminBasePage {
 		return null;
 	}
 
-	public List<Module> getModules() {
-		if(_modules == null){
+	public List<Page> getPages() {
+		if(_pages == null){
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_modules = Module.getInstance().findByProperty(s, false, "appId", _app.getId());
+				_pages = Page.getInstance().findByProperty(s, false, "appId", _app.getId());
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);
 				addErrMsg(e.getMessage(), null);
 			}
-			if(_modules == null)
-				_modules = new ArrayList<Module>();
+			if(_pages == null)
+				_pages = new ArrayList<Page>();
 		}
-		return _modules;
+		return _pages;
 	}
 
-	@OnEvent(component="delmodule")
+	@OnEvent(component="del")
 	public void delete(Long id){
 		try {
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
-			Module.getInstance().deleteById(s, id);
+			Page.getInstance().deleteById(s, id);
 			s.flush();
 		} catch (Exception e) {
 			getLog().error(e.getMessage(),e);
@@ -61,5 +61,20 @@ public class Pages extends AdminBasePage {
 		}
 	}
 
+	@OnEvent(component="default")
+	public void setDefault(Long id){
+		try {
+			Session s = getTransactionManager().getSession();
+			s.beginTransaction();
+			Page.getInstance().setDefault(s, _app.getId(), id);
+			s.flush();
+		} catch (Exception e) {
+			getLog().error(e.getMessage(),e);
+			addErrMsg(translate("error.cannot_delete_module"), null);
+		}
+	}
 
+	public String getCategory(){
+		return "";
+	}
 }

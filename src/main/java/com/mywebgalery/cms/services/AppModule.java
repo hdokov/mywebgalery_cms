@@ -203,20 +203,31 @@ public class AppModule {
 
 
 	// MODULES
-    public void contributeComponentMessagesSource(OrderedConfiguration<Resource> configuration,@Value("conf/modules.properties")Resource catalog) {
-    	configuration.add("BaseComponent",catalog);
-    }
-
 	public static ModulesSourceService buildFileServicerDispatcher(Map<String, ModuleDescriptor> contributions) {
 		return new ModulesSourceService(contributions);
 	}
 
+	/**
+	 * Add localization files for the modules
+	 */
+    public void contributeComponentMessagesSource(OrderedConfiguration<Resource> configuration,@Value("conf/modules.properties")Resource catalog) {
+    	configuration.add("BaseComponent",catalog);
+    }
+
+    /**
+     * Include the modules in the list of available modules
+     * @param configuration
+     */
 	public static void contributeFileServicerDispatcher(MappedConfiguration<String, ModuleDescriptor> configuration) {
 		configuration.add("module.login", new ModuleDescriptor("Log in/Log out", "module.login"));
 		configuration.add("module.html", new ModuleDescriptor("Log in/Log out", "module.html"));
 		configuration.add("module.menu", new ModuleDescriptor("Log in/Log out", "module.menu"));
 	}
 
+	/**
+	 * Add the display blocks for the modules
+	 * @param configuration
+	 */
 	public void contributeBeanBlockSource(Configuration<BeanBlockContribution> configuration) {
 		configuration.add(new DisplayBlockContribution("module.login", "modules/ModuleLogin", "view"));
 		configuration.add(new EditBlockContribution("module.login", "modules/ModuleLogin", "edit"));

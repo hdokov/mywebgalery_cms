@@ -25,6 +25,14 @@ import org.slf4j.LoggerFactory;
 
 import com.mywebgalery.cms.utils.StringUtils;
 
+/**
+ * Base superclass for all persistent classes.
+ * Has basic methods to get/save/update/delete objects.
+ *
+ * @author ican
+ *
+ * @param <T>
+ */
 @MappedSuperclass
 public class Model<T extends Model<?>>  {
 

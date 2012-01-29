@@ -41,7 +41,6 @@ public class Layout extends BaseComponent {
 	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private Block _sidebar;
 
-
 	private String _logo;
 
 	@OnEvent(component = "logout")
@@ -60,5 +59,9 @@ public class Layout extends BaseComponent {
 
 	public int getYear(){
 		return GregorianCalendar.getInstance().get(Calendar.YEAR);
+	}
+
+	public String getUserName(){
+		return getSessionData().getUser() == null ? _messages.get("application.guest") : getSessionData().getUser().getName();
 	}
 }

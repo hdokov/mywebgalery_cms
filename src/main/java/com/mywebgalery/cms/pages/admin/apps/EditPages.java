@@ -8,32 +8,41 @@ import org.hibernate.Session;
 
 import com.mywebgalery.cms.base.AdminBasePage;
 import com.mywebgalery.cms.model.App;
+import com.mywebgalery.cms.model.Page;
 import com.mywebgalery.cms.utils.StringUtils;
 
-public class Edit extends AdminBasePage{
+public class EditPages extends AdminBasePage{
 
 	@Property @Persist
+	private Page _page;
+
 	private App _app;
+
 
 	@OnEvent(value=EventConstants.ACTIVATE)
 	public Object activate(Object... params){
+		_app = (App)getSessionData().get("current_app");
+		if(_app == null){
+			addErrMsg(translate("error.select_app"), null);
+			return Index.class;
+		}
 		if(params == null || params.length == 0){
-			if(_app == null){
-				addErrMsg(translate("error.select_app"), null);
-				return Index.class;
+			if(_page == null){
+				addErrMsg(translate("error.select_page"), null);
+				return Pages.class;
 			}
 		} else {
 			if(params[0].toString().equals("new")){
-				_app = new App();
+				_page = new Page();
 			} else {
 				try {
 					Session s = getTransactionManager().getSession();
 					s.beginTransaction();
-					_app = App.getInstance().findById(s, Long.parseLong(params[0].toString()));
+					_page = Page.getInstance().findById(s, Long.parseLong(params[0].toString()));
 				} catch (Exception e) {
 					getLog().error(e.getMessage(),e);
 					addErrMsg(e.getMessage(), null);
-					return Index.class;
+					return Pages.class;
 				}
 			}
 		}
@@ -41,35 +50,32 @@ public class Edit extends AdminBasePage{
 	}
 
 	public String getTitle(){
-		return _app.getId() == 0 ? translate("header.new_app") : translate("header.edit_app");
+		return _page.getId() == 0 ? translate("header.new_page") : translate("header.edit_page");
 	}
 
 	@OnEvent(component="form")
 	public Object submit(){
 		if(getRequest().getRequest().getParameter("cancel") != null){
-			_app = null;
-			return Index.class;
+			_page = null;
+			return Pages.class;
 		}
 		try {
-			if(StringUtils.isBlank(_app.getName()))
-				addErrMsg(translate("error.name_required"), "name");
-			if(StringUtils.isBlank(_app.getTitle()))
+			if(StringUtils.isBlank(_page.getUrl()))
+				addErrMsg(translate("error.name_required"), "url");
+			if(StringUtils.isBlank(_page.getTitle()))
 				addErrMsg(translate("error.title_required"), "title");
 			if(!getAppMessages().empty())
 				return null;
 
-			if(_app.getOwner() == 0){
-				_app.setOwner(getUser().getId());
-				_app.setAccountId(getUser().getAccountId());
-			}
+			_page.setAppId(_app.getId());
 
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
-			_app.saveOrUpdate(s);
+			_page.saveOrUpdate(s);
 			s.flush();
-			_app = null;
-			addSucMsg(translate("message.app_saved"), null);
-			return Index.class;
+			_page = null;
+			addSucMsg(translate("message.page_saved"), null);
+			return Pages.class;
 		} catch (Exception e) {
 			getTransactionManager().rollback();
 			addErrMsg(e.getMessage(), null);

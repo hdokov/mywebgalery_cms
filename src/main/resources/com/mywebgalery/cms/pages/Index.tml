@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
@@ -11,37 +13,10 @@
 		<script type="text/javascript" src="${templateJs}"></script>
     </head>
     <body>
-    <t:messages />
-	<t:dynamic t:id='form' template="prop:template"
-		t:header='block:header' t:subheader='block:subheader'
-		t:left='block:left' t:right='block:right'
-		t:content='block:content' t:footer='block:footer' />
+		<t:dynamicpage t:id='wrap' template="prop:wrap" content="block:content"/>
 
-	<t:block id='header'>
-		header
-		<t:loop t:source='tests' t:value='test'>
-			<t:delegate to='prop:block' />
-		</t:loop>
-	</t:block>
-
-	<t:block id='subheader'>
-		subheader
-	</t:block>
-
-	<t:block id='left'>
-		left
-	</t:block>
-
-	<t:block id='content'>
-		content
-	</t:block>
-
-	<t:block id='right'>
-		right
-	</t:block>
-
-	<t:block id='footer'>
-		footer
-	</t:block>
-</body>
+		<t:block t:id="content">
+			<t:dynamicpage t:id='page' template="prop:template" />
+		</t:block>
+	</body>
 </html>

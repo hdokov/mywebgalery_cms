@@ -30,7 +30,7 @@
 				</t:pagelink>
 			</h1>
 			<ul class='topmenu'>
-				<li class='welcome'>${message:label.welcome_to}</li>
+				<li class='welcome'>${message:label.welcome} ${userName}</li>
 				<t:if test="user.anonymous">
 					<li><t:pagelink page='admin/register'>${message:label.register}</t:pagelink></li>
 				</t:if>

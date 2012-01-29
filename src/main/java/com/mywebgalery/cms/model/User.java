@@ -6,46 +6,69 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.annotations.Index;
 
 import com.mywebgalery.cms.utils.StringUtils;
 
 @Entity
 //@Audited
-@Table(name="users")
+@Table(name="users", uniqueConstraints={
+			@UniqueConstraint(columnNames={"accountid", "name"}),
+			@UniqueConstraint(columnNames={"accountid","email"}),
+			@UniqueConstraint(columnNames={"token"})
+		})
 public class User extends Model<User> {
 
 	@Column(columnDefinition="text", nullable=false)
+	@Index(name="user_name_index")
 	private String name;
+
 	@Column(columnDefinition="text", nullable=false)
 	private String firstname;
+
 	@Column(columnDefinition="text", nullable=false)
 	private String lastname;
+
 	@Column(columnDefinition="text", nullable=false)
+	@Index(name="user_email_index")
 	private String email;
+
 	@Column(columnDefinition="text", nullable=false)
 	private String pass;
+
 	@Column(columnDefinition="text")
 	private String country;
+
 	@Column(columnDefinition="text")
 	private String city;
+
 	@Column(columnDefinition="text")
 	private String zip;
+
 	@Column(columnDefinition="text")
 	private String address;
+
 	@Column(columnDefinition="text")
 	private String phone;
 
 	@Column(columnDefinition="timestamp without time zone")
 	private Date lastLoginUser;
+
 	@Column(columnDefinition="timestamp without time zone")
 	private Date lastLoginAdmin;
+
 	@Column(columnDefinition="text")
 	private String token;
+
 	private boolean admin;
+
 	private String privileges;
+
+	@Index(name="user_account_index")
 	private long accountId;
 
 	public String getName() {
