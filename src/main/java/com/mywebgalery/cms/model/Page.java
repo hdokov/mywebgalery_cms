@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.annotations.Index;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 
 
@@ -120,6 +122,13 @@ public class Page extends Model<Page> implements Resource {
 		Criteria c = s.createCriteria(getClass());
 		c.add(Property.forName("appId").eq(app)).add(Property.forName("url").eq(name));
 		return (Page)c.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Page> getByApp(Session s, long app) throws Exception {
+		Criteria c = s.createCriteria(getClass());
+		c.add(Property.forName("appId").eq(app)).addOrder(Order.asc("name"));
+		return c.list();
 	}
 
 	public void setDefault(Session s, long app, long pageId) throws Exception {

@@ -72,7 +72,23 @@ public class App extends Model<App> implements Resource {
 	@Column(columnDefinition="text")
 	private String theme;
 
+	/**
+	 * Custom css added after the one from the template and the theme
+	 */
+	@Column(columnDefinition="text")
+	private String css;
 
+	/**
+	 * Custom js included in the header
+	 */
+	@Column(columnDefinition="text")
+	private String js;
+
+	/**
+	 * Logo url
+	 */
+	@Column(columnDefinition="text")
+	private String logo;
 
 	/**
 	 * App description - will be set as HTML description meta tag
@@ -141,6 +157,26 @@ public class App extends Model<App> implements Resource {
 	public void setTemplate(String template) {
 		this.template = template;
 	}
+
+	public String getCss() {
+		return css;
+	}
+	public void setCss(String css) {
+		this.css = css;
+	}
+	public String getJs() {
+		return js;
+	}
+	public void setJs(String js) {
+		this.js = js;
+	}
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
 
 
 	// DAO
