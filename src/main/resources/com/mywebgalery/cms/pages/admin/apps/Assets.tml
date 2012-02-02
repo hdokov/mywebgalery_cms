@@ -1,20 +1,50 @@
-<html t:type="layout" title='message:header.contents'
+<html t:type="layout" title='message:header.assets'
 	  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
 
+	<div class="path-trail">
+		<a t:type='pagelink' t:page="admin/apps/assets">${message:label.root}/</a>
+		<t:loop t:source='path' t:index='index'>
+			<t:if test='last'>
+				<span>${pathName}</span>
+			<t:parameter name='else'>
+				<a t:type='pagelink' t:page="admin/apps/assets" t:context='pathOffset'>${pathName}/</a>
+			</t:parameter>
+			</t:if>
+		</t:loop>
+	</div>
+	<h3>Folders</h3>
 	<ul>
 		<li t:type='loop' t:source='dirs' t:value='file'>
-			${file.name}
+			<a t:type='pagelink' t:page="admin/apps/assets" t:context='dirOffset'>${file.name}</a>
 		</li>
 	</ul>
 
+	<h3>Files</h3>
 	<ul>
 		<li t:type='loop' t:source='files' t:value='file'>
 			${file.name}
 		</li>
 	</ul>
-
+	<div title='Add folder' class='add_folder'>
+		<t:form t:id='addfolder'>
+			<t:hidden t:value='offset' />
+			<t:label for="folder">${message:label.folder_name}</t:label>
+			<t:textfield t:id='folder' value="newFolder" />
+			<input type="submit" value="${message:label.add_folder}"/>
+			<t:messages component="foldername" />
+		</t:form>
+	</div>
+	<div title='Add file' class='add_file'>
+		<t:form t:id='addfile'>
+			<t:hidden t:value='offset' />
+			<t:label for="upload">${message:label.file}</t:label>
+			<input t:id="upload" t:type="upload" />
+			<input type="submit" value="${message:label.add_file}"/>
+			<t:messages component="file" />
+		</t:form>
+	</div>
 	<p:sidebar>
 		<t:adminmenu />
 	</p:sidebar>
