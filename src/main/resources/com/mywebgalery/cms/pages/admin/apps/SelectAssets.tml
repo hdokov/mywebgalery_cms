@@ -1,15 +1,14 @@
-<html t:type="layout" title='message:header.assets'
-	  xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
-
+<body>
 	<div class="path-trail">
-		<a t:type='pagelink' t:page="admin/apps/assets">${message:label.root}/</a>
+		<a class='dirlink' t:type='pagelink' t:page="admin/apps/selectassets">${message:label.root}/</a>
 		<t:loop t:source='path' t:index='index'>
 			<t:if test='last'>
 				<span>${pathName}</span>
 			<t:parameter name='else'>
-				<a t:type='pagelink' t:page="admin/apps/assets" t:context='pathOffset'>${pathName}/</a>
+				<a class='dirlink' t:type='pagelink' t:page="admin/apps/selectassets" t:context='pathOffset'>${pathName}/</a>
 			</t:parameter>
 			</t:if>
 		</t:loop>
@@ -17,14 +16,14 @@
 	<h3>Folders</h3>
 	<ul>
 		<li t:type='loop' t:source='dirs' t:value='file'>
-			<a t:type='pagelink' t:page="admin/apps/assets" t:context='dirOffset'>${file.name}</a>
+			<a  class='dirlink' t:type='pagelink' t:page="admin/apps/assets" t:context='dirOffset'>${file.name}</a>
 		</li>
 	</ul>
 
 	<h3>Files</h3>
 	<ul>
 		<li t:type='loop' t:source='files' t:value='file'>
-			${file.name}
+			<a class='filelink' href='${fileOffset}'>${file.name}</a>
 		</li>
 	</ul>
 	<div title='Add folder' class='add_folder'>
@@ -47,8 +46,5 @@
 	</div>
 	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
 
-	<p:sidebar>
-		<t:adminmenu />
-	</p:sidebar>
-
+</body>
 </html>

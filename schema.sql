@@ -14,10 +14,15 @@
         created timestamp without time zone,
         updated timestamp without time zone,
         accountId int8 not null,
+        css text,
         descr text,
+        js text,
         keywords text,
+        logo text,
         name text,
         owner int8 not null,
+        template text,
+        theme text,
         title text,
         wrap text,
         primary key (id),
@@ -31,6 +36,18 @@
         timestamp timestamp,
         username varchar(255),
         primary key (id)
+    );
+
+    create table categories (
+        id  bigserial not null,
+        created timestamp without time zone,
+        updated timestamp without time zone,
+        appId int8 not null,
+        name text,
+        ordered int4,
+        parentCategory int8,
+        primary key (id),
+        unique (appId, name)
     );
 
     create table modules (
@@ -94,6 +111,15 @@
     create index app_name_index on apps (name);
 
     create index app_account_index on apps (accountId);
+
+    create index category_app_index on categories (appId);
+
+    create index category_parent_index on categories (parentCategory);
+
+    alter table categories
+        add constraint FK4D47461C8A0CE329
+        foreign key (parentCategory)
+        references categories;
 
     create index module_app_index on modules (appId);
 

@@ -127,7 +127,7 @@ public class Page extends Model<Page> implements Resource {
 	@SuppressWarnings("unchecked")
 	public List<Page> getByApp(Session s, long app) throws Exception {
 		Criteria c = s.createCriteria(getClass());
-		c.add(Property.forName("appId").eq(app)).addOrder(Order.asc("name"));
+		c.add(Property.forName("appId").eq(app)).addOrder(Order.asc("title"));
 		return c.list();
 	}
 

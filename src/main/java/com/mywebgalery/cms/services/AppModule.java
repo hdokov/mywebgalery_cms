@@ -72,7 +72,7 @@ public class AppModule {
 		// header. If existing assets are changed, the version number should
 		// also
 		// change, to force the browser to download new versions.
-		configuration.add(SymbolConstants.APPLICATION_VERSION, "0.0.1-SNAPSHOT");
+		configuration.add(SymbolConstants.APPLICATION_VERSION, "0.1");
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class AppModule {
 			}
 		};
 
-		configuration.override("DefaultValidationDecorator", validationDecorator);
+		configuration.override("ValidationDecorator", validationDecorator);
 
 	}
 

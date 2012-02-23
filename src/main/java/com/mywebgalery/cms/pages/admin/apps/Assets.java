@@ -41,7 +41,6 @@ public class Assets extends AdminBasePage {
 
 	@Property
     private UploadedFile _upload;
-	@Property
 	private File _file;
 
 	@Property
@@ -159,5 +158,14 @@ public class Assets extends AdminBasePage {
 	public boolean isLast(){
 		return _index == _path.length -1;
 	}
+
+	public File getFile() {
+		return _file;
+	}
+
+	public void setFile(File file) {
+		_file = file;
+	}
+
 
 }
