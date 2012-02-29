@@ -1,11 +1,7 @@
 package com.mywebgalery.cms.pages.admin.apps;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
-import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.services.Request;
 import org.hibernate.Session;
 
@@ -16,7 +12,7 @@ import com.mywebgalery.cms.utils.StringUtils;
 
 public class Categories extends AdminBasePage {
 
-	private List<Category> _categories;
+	private Category _root;
 
 	private App _app;
 
@@ -30,20 +26,20 @@ public class Categories extends AdminBasePage {
 		return null;
 	}
 
-	public List<Category> getCategories() {
-		if(_categories == null){
+	public Category getRoot() {
+		if(_root == null){
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_categories = Category.getInstance().getRootCategories(s, _app.getId());
+				_root = Category.getInstance().getRootCategory(s, _app.getId());
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);
 				addErrMsg(e.getMessage(), null);
 			}
-			if(_categories == null)
-				_categories = new ArrayList<Category>();
+			if(_root == null)
+				_root = new Category();
 		}
-		return _categories;
+		return _root;
 	}
 
 	@OnEvent(component="edit")
@@ -59,7 +55,36 @@ public class Categories extends AdminBasePage {
 				Category c = new Category();
 				c.setAppId(_app.getId());
 				c.setName(name);
-				if(StringUtils.isBlank(parent)){
+				Category p = Category.getInstance().get(s, Long.parseLong(parent));
+				if(p == null){
+					s.getTransaction().rollback();
+					addErrMsg(translate("error.invalid_request"), null);
+					return;
+				}
+				//c.setParentCategory(p.getId());
+				p.addSubCategory(c);
+
+				p.save(s);
+				//c.save(s);
+			} else {
+				Category c = Category.getInstance().get(s, Long.parseLong(id));
+				c.setName(name);
+				if(c == null){
+					s.getTransaction().rollback();
+					addErrMsg(translate("error.invalid_request"), null);
+					return;
+				}
+				Category p = Category.getInstance().get(s, Long.parseLong(parent));
+				if(p == null){
+					s.getTransaction().rollback();
+					addErrMsg(translate("error.invalid_request"), null);
+					return;
+				}
+				if(p.getId() != c.getParentCategory()){
+					c.setParentCategory(p.getId());
+					p.addSubCategory(c);
+					p.save(s);
+				} else {
 					c.save(s);
 				}
 			}

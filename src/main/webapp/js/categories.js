@@ -15,6 +15,24 @@ $(function(){
 		return false;
 	});
 
+	$("a.editcategory").click(function(){
+		var cat = $(this)
+		$('.catid').val(cat.attr('href'));
+		$('.catparentid').val(cat.attr('parent'));
+		$('.catname').val(cat.text());
+		$('.edit_category_dialog').dialog('open');
+		return false;
+	});
+
+	$("a.add_subcategory").click(function(){
+		var cat = $(this)
+		$('.catid').val('');
+		$('.catparentid').val(cat.attr('href'));
+		$('.catname').val('');
+		$('.edit_category_dialog').dialog('open');
+		return false;
+	});
+
 	$('.edit_category_dialog').dialog({
 		bgiframe: true,
 		autoOpen: false,
@@ -25,6 +43,10 @@ $(function(){
 				$(this).dialog('close');
 			},
 			'Submit': function() {
+				if(!$('.catname').val() || $('.catname').val() == ''){
+					alert("Name cannot be blank.");
+					return;
+				}
 				$('.edit_category_dialog form').submit();
 			}
 		},

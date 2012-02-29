@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -43,8 +44,9 @@ public class Category extends Model<Category> {
 	/**
 	 * The category this category belongs to
 	 */
-	@Index(name="category_parent_index")
-	private Long parentCategory;
+	@ManyToOne
+	@JoinColumn(name="parentCategory", nullable=true, updatable=true, insertable=true)
+	private Category parentCategory;
 
 	@OneToMany
 	@Cascade({CascadeType.ALL})
@@ -72,10 +74,10 @@ public class Category extends Model<Category> {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Long getParentCategory() {
+	public Category getParentCategory() {
 		return parentCategory;
 	}
-	public void setParentCategory(Long parentCategory) {
+	public void setParentCategory(Category parentCategory) {
 		this.parentCategory = parentCategory;
 	}
 
@@ -86,6 +88,17 @@ public class Category extends Model<Category> {
 		this.subcategories = subcategories;
 	}
 	public void addSubCategory(Category c){
+		subcategories.add(c);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && obj instanceof Category && id == ((Category)obj).id;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int)id;
 	}
 
 	// DAO
@@ -94,11 +107,16 @@ public class Category extends Model<Category> {
 		return INSTANCE;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Category> getRootCategories(Session s, long appId) throws Exception{
+	public Category getRootCategory(Session s, long appId) throws Exception{
 		Criteria c = s.createCriteria(getClass());
 		c.add(Property.forName("appId").eq(appId)).add(Property.forName("parentCategory").isNull());
-		List<Category> all = (List<Category>)c.list();
-		return all;
+		Category cat = (Category)c.uniqueResult();
+		if(cat == null){
+			cat = new Category();
+			cat.setAppId(appId);
+			cat.setName("root");
+			cat.save(s);
+		}
+		return cat;
 	}
 }

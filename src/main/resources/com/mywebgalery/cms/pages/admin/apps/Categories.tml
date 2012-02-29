@@ -4,9 +4,9 @@
       xmlns:p="tapestry:parameter">
 
 	<ul class="category_list">
-		<t:listcategories categories="categories" controls='true' />
+		<t:listcategories category="root" controls='true' />
 	</ul>
-	<a class="new" href="#">${message:label.add_category}</a>
+	<a class="add_subcategory" href="${root.id}">${message:label.add_category}</a>
 	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
 
 	<p:sidebar>

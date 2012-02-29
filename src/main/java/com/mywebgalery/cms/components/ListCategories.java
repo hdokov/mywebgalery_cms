@@ -1,7 +1,5 @@
 package com.mywebgalery.cms.components;
 
-import java.util.List;
-
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.BeginRender;
@@ -26,10 +24,10 @@ public class ListCategories extends BaseComponent {
 	private boolean _controls;
 
 	@Parameter(required=true) @Property
-	private List<Category> _categories;
+	private Category _category;
 
 	@OnEvent(value="del")
-	public void delete(Long id){
+	public void delete(Long id, Long parent){
 		try {
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
@@ -43,29 +41,22 @@ public class ListCategories extends BaseComponent {
 
 	@BeginRender
 	public void render(MarkupWriter w){
-		if(_categories != null){
-			for(Category c : _categories)
-				renderCategory(c,w);
+		if(_category != null){
+			if(_category.getParentCategory() == null){
+				for(Category c : _category.getSubcategories())
+					renderCategory(c,w);
+			} else {
+				renderCategory(_category, w);
+			}
 		}
-//		<li t:type='loop' t:source='categories' t:value='category' class='category'>
-//		<div class="category_name" id="${category.id}" parent="${category.parentCategory}">${category.name}</div>
-//		<div class="controls" t:type='if' test='controls'>
-//			<t:actionlink t:id='del' t:context="category.id"  onclick="return confirm('${message:message.confirm_category_delete}');">${message:label.delete}</t:actionlink>
-//		</div>
-//		<t:if test="category.subcategories">
-//			<ul class='category_sublist'>
-//				<t:listcategories categories="category.subcategories" controls='prop:controls' />
-//			</ul>
-//		</t:if>
-//		<a class="new" t:type='if' test='controls' href="${category.id}">#{message:label.add_subcategory}</a>
-//	</li>
-
 	}
 
 	private void renderCategory(Category c, MarkupWriter w){
+		if(c == null)
+			return;
 		w.element("li", "class","category_wrap");
 		w.element("a",
-				"class", "category",
+				"class", _controls ? "editcategory" : "category",
 				"href", c.getId(),
 				"parent", c.getParentCategory());
 		w.write(c.getName());
@@ -73,11 +64,21 @@ public class ListCategories extends BaseComponent {
 		if(_controls){
 			w.element("a",
 					"class", "del_category",
-					"href", _res.createEventLink("del", c.getId()));
+					"href", _res.createEventLink("del", c.getId(), c.getParentCategory()));
 			w.write(_messages.get("label.delete"));
-			w.end();//a.category
+			w.end();//a.del
+			w.element("a",
+					"class", "add_subcategory",
+					"href", c.getId());
+			w.write(_messages.get("label.add_subcategory"));
+			w.end();//a.add_subcategory
 		}
-
+		if(c.getSubcategories().size()>0){
+			w.element("ul", "class", "category_sublist");
+			for(Category cc : c.getSubcategories())
+				renderCategory(cc, w);
+			w.end();//ul.category_sublist
+		}
 		w.end();//li.category_wrap
 	}
 }
