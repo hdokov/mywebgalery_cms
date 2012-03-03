@@ -1,18 +1,24 @@
 package com.mywebgalery.cms.pages.admin.apps;
 
+import java.util.List;
+
 import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.Renderable;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.services.Request;
 import org.hibernate.Session;
 
 import com.mywebgalery.cms.base.AdminBasePage;
 import com.mywebgalery.cms.model.App;
-import com.mywebgalery.cms.model.Category;
+import com.mywebgalery.cms.model.Menu;
+import com.mywebgalery.cms.model.Page;
+import com.mywebgalery.cms.model.helpers.CategoryPageBean;
 import com.mywebgalery.cms.utils.StringUtils;
 
-public class Categories extends AdminBasePage {
+public class Menus extends AdminBasePage {
 
-	private Category _root;
+	private Menu _root;
 
 	private App _app;
 
@@ -26,18 +32,18 @@ public class Categories extends AdminBasePage {
 		return null;
 	}
 
-	public Category getRoot() {
+	public Menu getRoot() {
 		if(_root == null){
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_root = Category.getInstance().getRootCategory(s, _app.getId());
+				_root = Menu.getInstance().getRootMenu(s, _app.getId());
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);
 				addErrMsg(e.getMessage(), null);
 			}
 			if(_root == null)
-				_root = new Category();
+				_root = new Menu();
 		}
 		return _root;
 	}
@@ -52,37 +58,37 @@ public class Categories extends AdminBasePage {
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
 			if(StringUtils.isBlank(id)){
-				Category c = new Category();
+				Menu c = new Menu();
 				c.setAppId(_app.getId());
 				c.setName(name);
-				Category p = Category.getInstance().get(s, Long.parseLong(parent));
+				Menu p = Menu.getInstance().get(s, Long.parseLong(parent));
 				if(p == null){
 					s.getTransaction().rollback();
 					addErrMsg(translate("error.invalid_request"), null);
 					return;
 				}
-				//c.setParentCategory(p.getId());
-				p.addSubCategory(c);
+				//c.setParentMenu(p.getId());
+				p.addSubMenu(c);
 
 				p.save(s);
 				//c.save(s);
 			} else {
-				Category c = Category.getInstance().get(s, Long.parseLong(id));
+				Menu c = Menu.getInstance().get(s, Long.parseLong(id));
 				c.setName(name);
 				if(c == null){
 					s.getTransaction().rollback();
 					addErrMsg(translate("error.invalid_request"), null);
 					return;
 				}
-				Category p = Category.getInstance().get(s, Long.parseLong(parent));
+				Menu p = Menu.getInstance().get(s, Long.parseLong(parent));
 				if(p == null){
 					s.getTransaction().rollback();
 					addErrMsg(translate("error.invalid_request"), null);
 					return;
 				}
-				if(!p.equals(c.getParentCategory())){
-					c.setParentCategory(p);
-					p.addSubCategory(c);
+				if(!p.equals(c.getParent())){
+					c.setParent(p);
+					p.addSubMenu(c);
 					p.save(s);
 				} else {
 					c.save(s);
@@ -95,4 +101,35 @@ public class Categories extends AdminBasePage {
 		}
 	}
 
+	public Renderable getPageOptions(){
+		return new Renderable() {
+			public void render(MarkupWriter w) {
+				Session s = getTransactionManager().getSession();
+				s.beginTransaction();
+				List<CategoryPageBean> pages = Page.getInstance().getPagesList(s, _app.getId());
+				String category = null;
+				boolean groupStarted = false;
+				for(CategoryPageBean c : pages){
+					if(!c.getCategoryName().equals(category)){
+						if(groupStarted){
+							w.end();
+							groupStarted = false;
+						}
+						category = c.getCategoryName();
+						if(!"root".equals(category)){
+							groupStarted = true;
+							w.element("optgroup", "label", category);
+						}
+					}
+					if(c.getPageUrl() != null){
+						w.element("option", "value", c.getPageUrl());
+						w.write(c.getPageName());
+						w.end();
+					}
+				}
+				if(groupStarted)
+					w.end();
+			}
+		};
+	}
 }

@@ -17,6 +17,12 @@
 					<t:messages component="url"/>
 				</li>
 				<li>
+					<label>${message:label.category}</label>
+					<input type="text" value="${categoryName}" class='select_category' />
+					<input type="hidden" name='catid' value="${category.id}" class='categoryid' />
+					<t:messages component="category"/>
+				</li>
+				<li>
 					<label>${message:label.contents}</label>
 					<t:textarea value="page.content"/>
 					<t:messages component="content"/>
@@ -33,4 +39,9 @@
 		<t:adminmenu />
 	</p:sidebar>
 
+	<div title="${message:label.select_category}" class="select_category_dialog">
+		<ul class="category_list">
+			<t:listcategories category="root" controls='false' />
+		</ul>
+	</div>
 </html>

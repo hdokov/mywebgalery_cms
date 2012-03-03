@@ -1,0 +1,29 @@
+<html t:type="layout" title='message:header.menus'
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<ul class="category_list">
+		<t:listmenus menu="root" controls='true' />
+	</ul>
+	<a class="add_submenu" href="${root.id}">${message:label.add_menu}</a>
+	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
+
+	<p:sidebar>
+		<t:adminmenu />
+	</p:sidebar>
+
+	<div title='${message:label.menu}' style="display: none;" class="edit_menu_dialog">
+		<t:form t:id='edit'>
+			<input type='hidden' name='id' class='menuid'/>
+			<input type='hidden' name='parent' class='menuparentid'/>
+			<label class="b">${message:label.name}</label>
+			<input name='name' class='menuname'/>
+			<label class="b">${message:label.page}</label>
+			<select name='page' class='page'>
+				<option></option>
+				<t:delegate to="pageOptions" />
+			</select>
+		</t:form>
+	</div>
+</html>

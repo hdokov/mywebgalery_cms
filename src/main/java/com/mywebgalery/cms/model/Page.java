@@ -20,11 +20,18 @@ import org.hibernate.annotations.Index;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 
+import com.mywebgalery.cms.model.helpers.CategoryPageBean;
+import com.mywebgalery.cms.model.helpers.CategoryPageTransformer;
+
 
 @Entity
 @Table(name="pages", uniqueConstraints={@UniqueConstraint(columnNames={"appid", "url"})})
 //@Audited
 public class Page extends Model<Page> implements Resource {
+
+	public static final String PAGE_TYPE_STATIC = "static";
+	public static final String PAGE_TYPE_ARTICLE = "article";
+	//public static final String PAGE_TYPE_STATIC = "static";
 
 	@Index(name="page_app_index")
 	private long appId;
@@ -36,6 +43,7 @@ public class Page extends Model<Page> implements Resource {
 	@Index(name="page_url_index")
 	private String url;
 
+	@Index(name="page_type_index")
 	@Column(columnDefinition="text")
 	private String type;
 
@@ -125,9 +133,10 @@ public class Page extends Model<Page> implements Resource {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Page> getByApp(Session s, long app) throws Exception {
+	public List<Page> getByType(Session s, long app, String type) throws Exception {
 		Criteria c = s.createCriteria(getClass());
-		c.add(Property.forName("appId").eq(app)).addOrder(Order.asc("title"));
+		c.add(Property.forName("appId").eq(app)).add(Property.forName("type").eq(type));
+		c.addOrder(Order.asc("title"));
 		return c.list();
 	}
 
@@ -137,6 +146,15 @@ public class Page extends Model<Page> implements Resource {
 		q.setLong(0, pageId);
 		q.setLong(1, app);
 		q.executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CategoryPageBean> getPagesList(Session s, long appId){
+		SQLQuery q = s.createSQLQuery("select p.url as pageid, p.title as pagename, c.id as catid, c.name as catname, c.parentcategory as parent from categories c left join pages p on c.id = p.categoryid where c.appid = ?  order by c.parentcategory, c.ordered, p.id");
+		q.setLong(0, appId);
+		//CategoryPageBean root = new CategoryPageBean();
+		q.setResultTransformer(new CategoryPageTransformer());
+		return q.list();
 	}
 
 	// Resource methods

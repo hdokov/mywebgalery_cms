@@ -6,6 +6,7 @@
 	<ul>
 		<li>Logo</li>
 		<li>Design</li>
+		<li><a t:type='pagelink' t:page='admin/apps/menus'>${message:label.menus}</a></li>
 		<li><a t:type='pagelink' t:page='admin/apps/categories'>${message:label.categories}</a></li>
 		<li><a t:type='pagelink' t:page='admin/apps/assets'>${message:label.assets}</a></li>
 		<li><a t:type='pagelink' t:page='admin/apps/pages'>${message:label.pages}</a></li>

@@ -11,6 +11,7 @@ $(function(){
 		$('.catid').val('');
 		$('.catparentid').val('');
 		$('.catname').val('');
+		$('.edit_category_dialog').attr('title', $(this).text()).siblings().children('.ui-dialog-title').text($(this).text());
 		$('.edit_category_dialog').dialog('open');
 		return false;
 	});
@@ -20,6 +21,7 @@ $(function(){
 		$('.catid').val(cat.attr('href'));
 		$('.catparentid').val(cat.attr('parent'));
 		$('.catname').val(cat.text());
+		$('.edit_category_dialog').attr('title', $(this).text()).siblings().children('.ui-dialog-title').text($(this).text());
 		$('.edit_category_dialog').dialog('open');
 		return false;
 	});
@@ -29,6 +31,7 @@ $(function(){
 		$('.catid').val('');
 		$('.catparentid').val(cat.attr('href'));
 		$('.catname').val('');
+		$('.edit_category_dialog').attr('title', $(this).text()).siblings().children('.ui-dialog-title').text($(this).text());
 		$('.edit_category_dialog').dialog('open');
 		return false;
 	});

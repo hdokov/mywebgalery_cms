@@ -351,3 +351,4 @@ a.selected {text-decoration: none; color: #444;}
 .info_field div {float:left; margin-bottom: 10px;}
 .category_wrap a {margin-right: 5px; font-size: 0.8em;}
 .category_wrap a:first-child {margin-right: 20px; font-size: 1em;}
+.select_category {cursor: pointer;}

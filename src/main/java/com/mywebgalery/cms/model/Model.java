@@ -49,6 +49,9 @@ public class Model<T extends Model<?>>  {
 	@Column(columnDefinition="timestamp without time zone")
 	protected Date updated;
 
+	@Column(columnDefinition="text")
+	protected String permissions;
+
 	@SuppressWarnings("unchecked")
 	public static String propertyNames(Class<? extends Model> clazz){
 		String names = _propertyNames.get(clazz);
@@ -161,7 +164,12 @@ public class Model<T extends Model<?>>  {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
+	public String getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
+	}
 
 	// DAO METHODS
 	public void delete(Session s) throws Exception {

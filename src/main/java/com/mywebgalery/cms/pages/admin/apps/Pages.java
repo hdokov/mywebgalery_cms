@@ -37,7 +37,7 @@ public class Pages extends AdminBasePage {
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_pages = Page.getInstance().getByApp(s, _app.getId());
+				_pages = Page.getInstance().getByType(s, _app.getId(), Page.PAGE_TYPE_STATIC);
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);
 				addErrMsg(e.getMessage(), null);

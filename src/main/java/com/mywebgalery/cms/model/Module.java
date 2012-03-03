@@ -60,6 +60,12 @@ public class Module extends Model<Module> {
 	private String data;
 
 	/**
+	 * Shown/hidden pages persisted as JSON string.
+	 */
+	@Column(columnDefinition="text")
+	private String pages;
+
+	/**
 	 * Custom HTML content if needed
 	 */
 	@Column(columnDefinition="text")
@@ -111,6 +117,13 @@ public class Module extends Model<Module> {
 	}
 
 	// DAO
+
+	public String getPages() {
+		return pages;
+	}
+	public void setPages(String pages) {
+		this.pages = pages;
+	}
 
 	private static final Module INSTANCE = new Module();
 	public static Module getInstance(){

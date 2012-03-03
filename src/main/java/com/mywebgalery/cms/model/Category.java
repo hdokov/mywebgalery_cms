@@ -45,7 +45,7 @@ public class Category extends Model<Category> {
 	 * The category this category belongs to
 	 */
 	@ManyToOne
-	@JoinColumn(name="parentCategory", nullable=true, updatable=true, insertable=true)
+	@JoinColumn(name="parentCategory", nullable=true, updatable=true, insertable=true,columnDefinition="bigint")
 	private Category parentCategory;
 
 	@OneToMany

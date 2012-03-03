@@ -43,15 +43,17 @@ public class ListCategories extends BaseComponent {
 	public void render(MarkupWriter w){
 		if(_category != null){
 			if(_category.getParentCategory() == null){
+				if(!_controls)
+					renderCategory(_category, w, false);
 				for(Category c : _category.getSubcategories())
-					renderCategory(c,w);
+					renderCategory(c,w, true);
 			} else {
-				renderCategory(_category, w);
+				renderCategory(_category, w, true);
 			}
 		}
 	}
 
-	private void renderCategory(Category c, MarkupWriter w){
+	private void renderCategory(Category c, MarkupWriter w, boolean renderChildren){
 		if(c == null)
 			return;
 		w.element("li", "class","category_wrap");
@@ -59,7 +61,7 @@ public class ListCategories extends BaseComponent {
 				"class", _controls ? "editcategory" : "category",
 				"href", c.getId(),
 				"parent", c.getParentCategory());
-		w.write(c.getName());
+		w.write("root".equals(c.getName()) ? _messages.get("label.no_category") : c.getName());
 		w.end();//a.category
 		if(_controls){
 			w.element("a",
@@ -73,10 +75,10 @@ public class ListCategories extends BaseComponent {
 			w.write(_messages.get("label.add_subcategory"));
 			w.end();//a.add_subcategory
 		}
-		if(c.getSubcategories().size()>0){
+		if(renderChildren && c.getSubcategories().size()>0){
 			w.element("ul", "class", "category_sublist");
 			for(Category cc : c.getSubcategories())
-				renderCategory(cc, w);
+				renderCategory(cc, w, true);
 			w.end();//ul.category_sublist
 		}
 		w.end();//li.category_wrap

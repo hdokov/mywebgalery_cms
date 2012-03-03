@@ -22,6 +22,7 @@
 		<mapping class="com.mywebgalery.cms.model.Account"/>
 		<mapping class="com.mywebgalery.cms.model.App"/>
 		<mapping class="com.mywebgalery.cms.model.Category"/>
+		<mapping class="com.mywebgalery.cms.model.Menu"/>
 		<mapping class="com.mywebgalery.cms.model.Module"/>
 		<mapping class="com.mywebgalery.cms.model.Page"/>
 		<mapping class="com.mywebgalery.cms.model.User"/>

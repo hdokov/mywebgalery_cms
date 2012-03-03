@@ -2,6 +2,7 @@
     create table accounts (
         id  bigserial not null,
         created timestamp without time zone,
+        permissions text,
         updated timestamp without time zone,
         name text,
         owner int8 not null,
@@ -12,6 +13,7 @@
     create table apps (
         id  bigserial not null,
         created timestamp without time zone,
+        permissions text,
         updated timestamp without time zone,
         accountId int8 not null,
         css text,
@@ -41,11 +43,26 @@
     create table categories (
         id  bigserial not null,
         created timestamp without time zone,
+        permissions text,
         updated timestamp without time zone,
         appId int8 not null,
         name text,
         ordered int4,
-        parentCategory int8,
+        parentCategory bigint,
+        primary key (id),
+        unique (appId, name)
+    );
+
+    create table menus (
+        id  bigserial not null,
+        created timestamp without time zone,
+        permissions text,
+        updated timestamp without time zone,
+        appId int8 not null,
+        name text,
+        ordered int4,
+        uri text,
+        parent bigint,
         primary key (id),
         unique (appId, name)
     );
@@ -53,6 +70,7 @@
     create table modules (
         id  bigserial not null,
         created timestamp without time zone,
+        permissions text,
         updated timestamp without time zone,
         appId int8 not null,
         content text,
@@ -60,6 +78,7 @@
         descr text,
         displayName text,
         name text,
+        pages text,
         type text,
         primary key (id),
         unique (appId, name)
@@ -68,6 +87,7 @@
     create table pages (
         id  bigserial not null,
         created timestamp without time zone,
+        permissions text,
         updated timestamp without time zone,
         appId int8 not null,
         categoryId int8,
@@ -83,6 +103,7 @@
     create table users (
         id  bigserial not null,
         created timestamp without time zone,
+        permissions text,
         updated timestamp without time zone,
         accountId int8 not null,
         address text,
@@ -114,12 +135,17 @@
 
     create index category_app_index on categories (appId);
 
-    create index category_parent_index on categories (parentCategory);
-
-    alter table categories
-        add constraint FK4D47461C8A0CE329
-        foreign key (parentCategory)
+    alter table categories 
+        add constraint FK4D47461C8A0CE329 
+        foreign key (parentCategory) 
         references categories;
+
+    create index menu_app_index on menus (appId);
+
+    alter table menus 
+        add constraint FK62F96F461F8820C 
+        foreign key (parent) 
+        references menus;
 
     create index module_app_index on modules (appId);
 
