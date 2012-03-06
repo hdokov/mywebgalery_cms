@@ -21,6 +21,7 @@ $(function(){
 		$('.menuid').val(menu.attr('href'));
 		$('.menuparentid').val(menu.attr('parent'));
 		$('.menuname').val(menu.text());
+		$('select.page option[value='+menu.attr('page')+']').attr('selected', 'selected');
 		$('.edit_menu_dialog').attr('title', $(this).text()).siblings().children('.ui-dialog-title').text($(this).text());
 		$('.edit_menu_dialog').dialog('open');
 		return false;

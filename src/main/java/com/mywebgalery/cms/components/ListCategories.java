@@ -14,7 +14,7 @@ import org.hibernate.Session;
 import com.mywebgalery.cms.base.BaseComponent;
 import com.mywebgalery.cms.model.Category;
 
-@Import(library="context:js/categories.js")
+@Import(library="js/categories.js")
 public class ListCategories extends BaseComponent {
 
 	@Inject private ComponentResources _res;

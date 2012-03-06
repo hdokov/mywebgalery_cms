@@ -349,6 +349,6 @@ a.selected {text-decoration: none; color: #444;}
 .info_field h3 {margin-bottom: 10px;}
 .info_field label {float: left; clear: left; font-weight: bold; width: 150px; margin-right: 5px;}
 .info_field div {float:left; margin-bottom: 10px;}
-.category_wrap a {margin-right: 5px; font-size: 0.8em;}
-.category_wrap a:first-child {margin-right: 20px; font-size: 1em;}
-.select_category {cursor: pointer;}
+.category_wrap a, .menu_wrap a {margin-right: 5px; font-size: 0.8em;}
+.category_wrap a:first-child, .menu_wrap a:first-child {margin-right: 20px; font-size: 1em;}
+.select_category, .select_menu {cursor: pointer;}

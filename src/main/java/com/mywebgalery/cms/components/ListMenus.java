@@ -14,7 +14,7 @@ import org.hibernate.Session;
 import com.mywebgalery.cms.base.BaseComponent;
 import com.mywebgalery.cms.model.Menu;
 
-@Import(library="context:js/menus.js")
+@Import(library="js/menus.js")
 public class ListMenus extends BaseComponent {
 
 	@Inject private ComponentResources _res;
@@ -58,7 +58,8 @@ public class ListMenus extends BaseComponent {
 		w.element("a",
 				"class", _controls ? "editmenu" : "menu",
 				"href", c.getId(),
-				"parent", c.getParent());
+				"page", c.getUri(),
+				"parent", c.getParent().getId());
 		w.write(c.getName());
 		w.end();//a.Menu
 		if(_controls){

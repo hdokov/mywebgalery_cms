@@ -8,14 +8,40 @@
 </t:block>
 <t:block id='edit'>
 	<form t:type='form' t:id='form'>
-		<label>${message:label.name}</label>
-		<input t:type='textfield' t:value='module.name' />
-		<label>${message:label.descr}</label>
-		<input t:type='textfield' t:value='module.descr' />
-		<div class="floatfix"></div>
-		<input type="submit" name='save' value='${message:label.save}' />
-		<input type="submit" name='cancel' value='${message:label.cancel}' />
+		<ul>
+			<li>
+				<label>${message:label.name}</label>
+				<input t:type='textfield' t:value='module.name' />
+				<t:messages component="name"/>
+			</li>
+			<li>
+				<label>${message:label.title}</label>
+				<input t:type='textfield' t:value='module.displayName' />
+				<t:messages component="title"/>
+			</li>
+			<li>
+				<label>${message:label.descr}</label>
+				<input t:type='textfield' t:value='module.descr' />
+				<t:messages component="descr"/>
+			</li>
+			<li>
+				<label>${message:label.menu}</label>
+				<t:selectmenucomp id="menuId" name='menuName' />
+				<t:messages component="menu"/>
+			</li>
+			<li>
+				<input type="submit" name='save' value='${message:label.save}' />
+				<input type="submit" name='cancel' value='${message:label.cancel}' />
+			</li>
+		</ul>
 	</form>
+
+	<div title="${message:label.select_menu}" class="select_menu_dialog">
+		<ul class="category_list">
+			<t:listmenus menu="root" controls='false' />
+		</ul>
+	</div>
+
 </t:block>
 
 </t:content>

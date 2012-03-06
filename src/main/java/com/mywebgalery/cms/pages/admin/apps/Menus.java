@@ -54,6 +54,7 @@ public class Menus extends AdminBasePage {
 		String name = req.getParameter("name");
 		String id = req.getParameter("id");
 		String parent = req.getParameter("parent");
+		String page = req.getParameter("page");
 		try{
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
@@ -61,6 +62,7 @@ public class Menus extends AdminBasePage {
 				Menu c = new Menu();
 				c.setAppId(_app.getId());
 				c.setName(name);
+				c.setUri(page);
 				Menu p = Menu.getInstance().get(s, Long.parseLong(parent));
 				if(p == null){
 					s.getTransaction().rollback();
@@ -75,6 +77,7 @@ public class Menus extends AdminBasePage {
 			} else {
 				Menu c = Menu.getInstance().get(s, Long.parseLong(id));
 				c.setName(name);
+				c.setUri(page);
 				if(c == null){
 					s.getTransaction().rollback();
 					addErrMsg(translate("error.invalid_request"), null);

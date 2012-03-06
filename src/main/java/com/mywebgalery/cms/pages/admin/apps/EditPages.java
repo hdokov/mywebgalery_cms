@@ -15,7 +15,7 @@ import com.mywebgalery.cms.model.Category;
 import com.mywebgalery.cms.model.Page;
 import com.mywebgalery.cms.utils.StringUtils;
 
-@Import(library={"context:js/editor/jquery.wysiwyg.js","context:js/pages.js"})
+@Import(library={"context:js/editor/jquery.wysiwyg.js","js/pages.js"})
 public class EditPages extends AdminBasePage{
 
 	@Inject private Messages _messages;
