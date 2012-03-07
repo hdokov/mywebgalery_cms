@@ -59,8 +59,6 @@ $(function(){
 		bgiframe: true,
 		autoOpen: false,
 		modal: true,
-		width: 600,
-		height: 600,
 		buttons: {
 			Cancel: function() {
 				$(this).dialog('close');

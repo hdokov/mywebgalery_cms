@@ -2,8 +2,14 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 <t:block id='view'>
+	<h3 class="menu_title" t:type='if' t:test='showHeader'>${module.displayName}</h3>
 	<ul class='menu'>
-		<li><a t:type='pagelink' t:page='index'>Home</a></li>
+		<li class='root_menu' t:type='if' t:test='showRoot'><a t:type='pagelink' t:page='index' t:context='menu.uri'>${menu.name}</a></li>
+		<t:if test='showSubmenus'>
+			<li t:type='loop' t:value='current' t:source='menu.submenus' class='submenu'>
+				<a t:type='pagelink' t:page='index' t:context='current.uri'>${current.name}</a>
+			</li>
+		</t:if>
 	</ul>
 </t:block>
 <t:block id='edit'>
@@ -28,6 +34,18 @@
 				<label>${message:label.menu}</label>
 				<t:selectmenucomp id="menuId" name='menuName' />
 				<t:messages component="menu"/>
+			</li>
+			<li>
+				<label>${message:label.show_menu_title}</label>
+				<input t:type='checkbox' value='showHeader' />
+			</li>
+			<li>
+				<label>${message:label.show_root}</label>
+				<input t:type='checkbox' value='showRoot' />
+			</li>
+			<li>
+				<label>${message:label.show_submenus}</label>
+				<input t:type='checkbox' value='showSubmenus' />
 			</li>
 			<li>
 				<input type="submit" name='save' value='${message:label.save}' />

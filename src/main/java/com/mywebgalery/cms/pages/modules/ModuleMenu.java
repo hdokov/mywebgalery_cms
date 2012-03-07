@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.tapestry5.annotations.Environmental;
-import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.annotations.Property;
 import org.hibernate.Session;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -17,8 +17,10 @@ import com.mywebgalery.cms.pages.admin.apps.Modules;
 
 public class ModuleMenu extends BasePage {
 
-	public static final String MENU_NAME_KEY = "menuName";
 	public static final String MENU_ID_KEY = "menuId";
+	public static final String MENU_SHOW_ROOT_KEY = "showRoot";
+	public static final String MENU_SHOW_SUB_KEY = "showSubmenus";
+	public static final String MENU_SHOW_HEADER_KEY = "showMenuHeader";
 	//public static final String MENU_NAME_KEY = "menuName";
 
 	@Environmental
@@ -29,6 +31,9 @@ public class ModuleMenu extends BasePage {
 	private Menu _root;
 
 	private Menu _menu;
+
+	@Property
+	private Menu _current;
 
 	@OnEvent(component="form")
 	public Object submit(){
@@ -94,7 +99,31 @@ public class ModuleMenu extends BasePage {
 		return getMenu() == null ? "" : getMenu().getName();
 	}
 
-	private Menu getMenu(){
+	public boolean getShowRoot(){
+		return "true".equals(getData().get(MENU_SHOW_ROOT_KEY));
+	}
+
+	public void setShowRoot(boolean show){
+		getData().put(MENU_SHOW_ROOT_KEY, String.valueOf(show));
+	}
+
+	public boolean getShowSubmenus(){
+		return "true".equals(getData().get(MENU_SHOW_SUB_KEY));
+	}
+
+	public void setShowSubmenus(boolean show){
+		getData().put(MENU_SHOW_SUB_KEY, String.valueOf(show));
+	}
+
+	public boolean getShowHeader(){
+		return "true".equals(getData().get(MENU_SHOW_HEADER_KEY));
+	}
+
+	public void setShowHeader(boolean show){
+		getData().put(MENU_SHOW_HEADER_KEY, String.valueOf(show));
+	}
+
+	public Menu getMenu(){
 		if(_menu == null){
 			if(getMenuId() != null){
 				try {
