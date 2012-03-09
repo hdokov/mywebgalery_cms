@@ -1,10 +1,3 @@
-var fileuploadaction = '';
-var imagetag;
-function openUploadDialog(action, image){
-	fileuploadaction=action;
-	imagetag = image;
-	$('.uploadfiledialog').dialog('open');
-}
 $(function(){
 
 	$("a.new").click(function(){

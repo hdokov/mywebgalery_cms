@@ -1,0 +1,40 @@
+<html t:type="layout" title='message:header.design'
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<ul class="products_list">
+		<li>
+  			<div class="image">
+				<img src="${app.logo}" />
+  			</div>
+  			<div class="item_content">
+	   			<div class="name">${message:label.logo}</div>
+	   			<div class="description"></div>
+	   			<!-- div class="price"><t:outputraw value="price" /></div-->
+   			</div>
+   			<div class="controls">
+				<a t:type='eventlink' t:event='selectlogo' class="select_asset">${message:label.select_logo}</a>
+				<a t:type='eventlink' t:event='clearlogo'>${message:label.clear_logo}</a>
+			</div>
+		</li>
+		<li>
+  			<div class="image">
+				<img src="" />
+  			</div>
+  			<div class="item_content">
+	   			<div class="name">${message:label.page_wrap}</div>
+	   			<div class="description"></div>
+	   			<!-- div class="price"><t:outputraw value="price" /></div-->
+   			</div>
+   			<div class="controls">
+				<a t:type='pagelink' t:page='admin/apps/editwrap'>${message:label.edit}</a>
+			</div>
+		</li>
+	</ul>
+
+	<p:sidebar>
+		<t:adminmenu />
+	</p:sidebar>
+	<t:selectasset />
+</html>

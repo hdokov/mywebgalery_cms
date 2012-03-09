@@ -92,7 +92,8 @@ public class Assets extends AdminBasePage {
 			addErrMsg(translate("error.name_required"), "foldername");
 			return _linkSource.createPageRenderLinkWithContext(getClass(), _dirOffset);
 		}
-		_currentRoot = new File(_currentRoot,_dirOffset);
+		if(_dirOffset != null)
+			_currentRoot = new File(_currentRoot,_dirOffset);
 		File dir = new File(_currentRoot,_newFolder);
 		if(dir.mkdir()){
 			addSucMsg(translate("message.folder_added"), null);

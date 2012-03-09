@@ -28,7 +28,8 @@ public class EditWrap extends AdminBasePage{
 	@OnEvent(component="form")
 	public Object submit(){
 		if(getRequest().getRequest().getParameter("cancel") != null){
-			return Pages.class;
+			getTransactionManager().rollback();
+			return Design.class;
 		}
 		try {
 			if(StringUtils.isBlank(_app.getWrap()))
@@ -41,7 +42,7 @@ public class EditWrap extends AdminBasePage{
 			_app.update(s);
 			s.flush();
 			addSucMsg(translate("message.app_saved"), null);
-			return Pages.class;
+			return Design.class;
 		} catch (Exception e) {
 			getTransactionManager().rollback();
 			addErrMsg(e.getMessage(), null);
