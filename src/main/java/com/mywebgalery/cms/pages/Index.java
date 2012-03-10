@@ -50,7 +50,7 @@ public class Index extends BasePage {
 
 
 	public String getTitle(){
-		return getPage().getTitle();
+		return _page.getTitle();
 	}
 
 	public Asset2 getTemplate(){
@@ -92,12 +92,19 @@ public class Index extends BasePage {
 	public String getTemplateCss(){
 		return String.format("/templates/%s/template.css", getApp().getTemplate());
 	}
+	public String getThemeCss(){
+		return String.format("/themes/%s/theme.css", getApp().getTheme());
+	}
 	public String getTemplateJs(){
 		return String.format("/templates/%s/template.js", getApp().getTemplate());
 	}
 
 	public String getDynamicCss(){
-		return "body {background:#eee;}";
+		return getApp().getCss();
+	}
+
+	public String getDynamicJs(){
+		return getApp().getJs();
 	}
 
 	public Page getPage(){

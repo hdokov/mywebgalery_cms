@@ -82,8 +82,8 @@
 	            </div>
             </div>
             <!-- end content -->
+	        <div class='floatfix'></div>
         </div>
-        <div class='floatfix'></div>
         <!-- end page -->
         <!-- start footer -->
         <div id="footer">
@@ -98,6 +98,7 @@
                 Design by
                 <a href="http://mywebgalery.com/">My Web Gallery</a>
             </p>
+	        <div class='floatfix'></div>
         </div>
         <!-- end footer -->
         <div class='floatfix'></div>

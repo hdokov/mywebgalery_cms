@@ -1,5 +1,144 @@
-.page {width: 900px; margin: auto;}
-.floatfix {clear: both; height: 0px;}
-.left_panel {width: 200px; float: left;}
-.content {width: 480px; float: left; margin-left: 10px;}
-.right_panel {width: 200px; float: right;}
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h1 a, h2, h2 a, h3, h3 a {
+    margin: 0;
+}
+p, ol, ul {
+    margin-bottom: 1em;
+}
+
+blockquote {
+    margin: 0 0 0 1.5em;
+    padding-left: 1em;
+    border-left: 5px solid #ddd;
+}
+img {border: 0 none;}
+/* Header */
+
+.header {
+    width: 950px;
+    margin: 0 auto 10px auto;
+	border: 1px solid;
+	border-top: 0 none;
+	-moz-border-radius-bottomright: 10px; -webkit-border-bottom-right-radius: 10px; border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px; -webkit-border-bottom-left-radius: 10px; border-bottom-left-radius: 10px;
+}
+
+.logo {
+    float: left;
+    margin: 5px 0 20px 20px;
+}
+
+.logo a {
+    border: 0 none;
+}
+.logo img {border: 0 none;}
+
+.topmenu {
+    float: right;
+    margin: 0px 20px 20px 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid;
+    border-top: 0 none;
+	-moz-border-radius-bottomright: 10px; -webkit-border-bottom-right-radius: 10px; border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px; -webkit-border-bottom-left-radius: 10px; border-bottom-left-radius: 10px;
+}
+
+.topmenu ul {float: left; margin: 0; padding: 0;}
+.topmenu li {
+    display: block;
+    float: left;
+    border-right: 1px solid;
+}
+.topmenu li:first-child {
+	border-right: 0 none;
+}
+
+.topmenu a {
+    display: block;
+    padding: 0px 20px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: lowercase;
+    font-weight: bold;
+}
+
+/* Page */
+
+.page {
+    width: 950px;
+    margin: 0 auto 10px auto;
+}
+
+/* Content */
+
+.content {
+    float: left;
+    width: 735px;
+	-moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;
+	border: 1px solid ;
+}
+.subcontent {margin: 15px;}
+/* Sidebar */
+
+.rught_panel {
+    float: left;
+    width: 200px;
+	-moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;
+	border: 1px solid;
+}
+.rught_panel a {
+	font-weight: bold;
+	text-decoration: none;
+	text-transform: lowercase;
+	line-height: 1.5em;
+	display: block;
+}
+
+/* Footer */
+
+.footer {
+    width: 950px;
+    margin: 10px auto 25px auto;
+}
+
+.footer .menu {
+	float: left;
+	list-style: none;
+	margin: 0 25px 10px 25px;
+	padding: 0;
+	width: 100%;
+}
+.footer .menu li {
+	float: left;
+	border-left: 1px solid;
+}
+.footer .menu li:first-child {
+	border-left: 0 none;
+}
+
+.footer .menu a {
+	font-weight: bold;
+	display: block;
+	line-height: 1.2em;
+	padding: 2px 10px;
+	text-decoration: none;
+}
+.footer .menu li:first-child a{padding-left: 0px}

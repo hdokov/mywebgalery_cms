@@ -31,8 +31,34 @@
 				<a t:type='pagelink' t:page='admin/apps/editwrap'>${message:label.edit}</a>
 			</div>
 		</li>
+		<li>
+  			<div class="image">
+				<img src="" />
+  			</div>
+  			<div class="item_content">
+	   			<div class="name">${message:label.custom_css}</div>
+	   			<div class="description"></div>
+	   			<!-- div class="price"><t:outputraw value="price" /></div-->
+   			</div>
+   			<div class="controls">
+				<a t:type='pagelink' t:page='admin/apps/editcss'>${message:label.edit}</a>
+			</div>
+		</li>
+		<li>
+  			<div class="image">
+				<img src="" />
+  			</div>
+  			<div class="item_content">
+	   			<div class="name">${message:label.custom_js}</div>
+	   			<div class="description"></div>
+	   			<!-- div class="price"><t:outputraw value="price" /></div-->
+   			</div>
+   			<div class="controls">
+				<a t:type='pagelink' t:page='admin/apps/editjs'>${message:label.edit}</a>
+			</div>
+		</li>
 	</ul>
-
+	<a t:type='pagelink' t:page='admin/apps/contents' class="fr">${message:label.back}</a>
 	<p:sidebar>
 		<t:adminmenu />
 	</p:sidebar>

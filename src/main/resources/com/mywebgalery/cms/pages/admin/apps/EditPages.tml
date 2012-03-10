@@ -24,7 +24,7 @@
 				</li>
 				<li>
 					<label>${message:label.contents}</label>
-					<t:textarea value="page.content"/>
+					<t:textarea value="page.content" class='page_area'/>
 					<t:messages component="content"/>
 				</li>
 				<li>

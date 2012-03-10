@@ -8,17 +8,18 @@
 			<ul>
 				<li>
 					<label>${message:label.template}</label>
-					<t:textfield value="app.template"/>
+					<t:textfield value="app.template" class='select_template'/>
+					<a href='#' class='load_template'>${message:label.load_template}</a>
 					<t:messages component="template"/>
 				</li>
 				<li>
 					<label>${message:label.theme}</label>
-					<t:textfield value="app.theme"/>
+					<t:textfield value="app.theme"  class='select_theme'/>
 					<t:messages component="theme"/>
 				</li>
 				<li>
 					<label>${message:label.contents}</label>
-					<t:textarea value="app.wrap"/>
+					<t:textarea value="app.wrap" class='wrap_text page_area'/>
 					<t:messages component="wrap"/>
 				</li>
 				<li>
@@ -27,6 +28,22 @@
 				</li>
 			</ul>
 		</t:form>
+	</div>
+
+	<div class="select_template_dialog" title='${message:label.select_template}' style="display: none">
+		<ul>
+			<li t:type='loop' t:value='file' t:source='templates'>
+				<a class='template' href='${file.name}'>${fileName}</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="select_theme_dialog" title='${message:label.select_theme}' style="display: none">
+		<ul>
+			<li t:type='loop' t:value='file' t:source='themes'>
+				<a class='theme' href='${file.name}'>${fileName}</a>
+			</li>
+		</ul>
 	</div>
 
 	<p:sidebar>

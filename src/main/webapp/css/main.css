@@ -86,7 +86,8 @@ img {border: 0 none;}
 /* Header */
 
 #header {
-    width: 950px;
+    width: 95%;
+    min-width: 950px;
     margin: 0 auto 10px auto;
 	border: 1px solid #446B49;
 	border-top: 0 none;
@@ -155,7 +156,8 @@ img {border: 0 none;}
 /* Page */
 
 #page {
-    width: 950px;
+	width: 95%;
+    min-width: 950px;
     margin: 0 auto 10px auto;
 }
 
@@ -163,7 +165,7 @@ img {border: 0 none;}
 
 #content {
     float: left;
-    width: 735px;
+    width: 80%;
 	-moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;
 	border: 1px solid #446B49;
 	background: #fff;
@@ -188,7 +190,7 @@ img {border: 0 none;}
 
 #sidebar {
     float: right;
-    width: 200px;
+    width: 18%;
 	-moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;
 	border: 1px solid #446B49;
 	background: #fff;
@@ -207,7 +209,8 @@ img {border: 0 none;}
 /* Footer */
 
 #footer {
-    width: 950px;
+	width: 95%;
+    min-width: 950px;
     margin: 10px auto 25px auto;
 }
 
@@ -332,15 +335,16 @@ ul.products_list img {
 
 .editor {width: 100%; height: 200px;clear: left;}
 
-form ul {float:left; margin: 0; padding: 0; clear: left; width: 600px;}
+form ul {float:left; margin: 0; padding: 0; clear: left; width: 100%;}
 form li {list-style: none; margin-bottom: 5px; padding: 2px 5px; float: left; width: 100%;}
 form label {
 	display: block;
 	float: left;
-	width: 180px;
+	width: 19%;
 }
-form input, form select, form textarea {width: 400px;}
+form input, form select, form textarea {width: 80%;}
 form input[type=submit], form input[type=checkbox], form input[type=radio] {width: auto;}
+textarea.page_area {height: 400px;}
 li.header {background: #626262;color: #fff;}
 tr.footer {font-weight: bold;}
 a.selected {text-decoration: none; color: #444;}
@@ -351,4 +355,4 @@ a.selected {text-decoration: none; color: #444;}
 .info_field div {float:left; margin-bottom: 10px;}
 .category_wrap a, .menu_wrap a {margin-right: 5px; font-size: 0.8em;}
 .category_wrap a:first-child, .menu_wrap a:first-child {margin-right: 20px; font-size: 1em;}
-.select_category, .select_menu {cursor: pointer;}
+.select_category, .select_menu, .select_template, .select_theme {cursor: pointer;}

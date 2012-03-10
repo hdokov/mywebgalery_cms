@@ -1,0 +1,26 @@
+<html t:type="layout" title='message:header.edit_css'
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<div>
+		<t:form t:id='form'>
+			<ul>
+				<li>
+					<label>${message:label.custom_css}</label>
+					<t:textarea value="app.css" class='page_area'/>
+					<t:messages component="css"/>
+				</li>
+				<li>
+					<input type="submit" value="${message:label.save}"/>
+					<input type="submit" value="${message:label.cancel}" name='cancel'/>
+				</li>
+			</ul>
+		</t:form>
+	</div>
+
+	<p:sidebar>
+		<t:adminmenu />
+	</p:sidebar>
+
+</html>

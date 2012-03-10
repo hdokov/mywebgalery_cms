@@ -1,0 +1,44 @@
+
+body {
+    color: #000;
+    background: #006600;
+}
+a {
+    color: #339900;
+}
+
+a:hover {
+    text-decoration: none;
+	color: #006600;
+}
+
+/* Header */
+
+.header {
+	border-color: #339900;
+	background: #f5f5f5;
+}
+
+.topmenu {
+    border-color: #339900;
+    background: #006600;
+	color:#f5f5f5;
+}
+.topmenu li{
+    border-color: #339900;
+}
+.topmenu a {
+    color: #f5f5f5;
+}
+
+.topmenu a:hover {
+    background: #339900;
+}
+
+.content, .right_panel {
+	border-color: #339900;
+	background: #f5f5f5;
+}
+.right_panel a:hover {
+	color: #006600;
+}

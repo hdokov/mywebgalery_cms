@@ -12,6 +12,7 @@
 		<li><a t:type='pagelink' t:page='admin/apps/modules'>${message:label.modules}</a></li>
 	</ul>
 
+	<a t:type='pagelink' t:page='admin/apps' class="fr">${message:label.back}</a>
 	<p:sidebar>
 		<t:adminmenu />
 	</p:sidebar>
