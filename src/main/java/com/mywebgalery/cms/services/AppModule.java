@@ -196,9 +196,12 @@ public class AppModule {
 	}
 
 	public static void contributeIgnoredPathsFilter(Configuration<String> configuration) {
-		configuration.add("/img/.*");
+		configuration.add("/images/.*");
 		configuration.add("/css/.*");
+		configuration.add("/js/.*");
 		configuration.add("/templates/.*");
+		configuration.add("/themes/.*");
+		configuration.add("/uploads/.*");
 	}
 
 
