@@ -96,6 +96,9 @@ img {border: 0 none;}
 	border: 1px solid ;
 }
 .subcontent {margin: 15px;}
+
+.content h2.page_header {border-bottom: 1px dotted;}
+
 /* Sidebar */
 
 .right_panel {
@@ -142,3 +145,31 @@ img {border: 0 none;}
 	text-decoration: none;
 }
 .footer .menu li:first-child a{padding-left: 0px}
+
+.footer p.legal {
+    line-height: normal;
+    font-size: .9em;
+    border-top: 1px dotted;
+    clear: left;
+    padding-top: 10px;
+    margin: 0 25px;
+    text-align: center;
+}
+.footer .legal a {
+    padding: 0;
+}
+
+
+.footer .rss {
+    background: url( images/img18.gif ) no-repeat left center;
+}
+
+.footer .xhtml {
+    background: url( images/img19.gif ) no-repeat left center;
+}
+
+.footer .css {
+    background: url( images/img20.gif ) no-repeat left center;
+}
+
+
