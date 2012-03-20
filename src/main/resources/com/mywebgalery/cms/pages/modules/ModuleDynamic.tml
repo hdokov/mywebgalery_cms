@@ -1,0 +1,51 @@
+<t:content xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<t:block id='view'>
+	view dynamic
+	<t:modules.showdynamicpagescomp module='module' category='category' data='data' />
+</t:block>
+<t:block id='edit'>
+	<form t:type='form' t:id='form'>
+		<ul>
+			<li>
+				<label>${message:label.name}</label>
+				<input t:type='textfield' t:value='module.name' />
+				<t:messages component="name"/>
+			</li>
+			<li>
+				<label>${message:label.title}</label>
+				<input t:type='textfield' t:value='module.displayName' />
+				<t:messages component="title"/>
+			</li>
+			<li>
+				<label>${message:label.descr}</label>
+				<input t:type='textfield' t:value='module.descr' />
+				<t:messages component="descr"/>
+			</li>
+
+			<li>
+				<label>${message:label.category}</label>
+				<t:selectcategorycomp id="categoryId" name='categoryName' />
+				<t:messages component="category"/>
+			</li>
+			<li>
+				<label>${message:label.show_subcategories}</label>
+				<input t:type='checkbox' value='showSubcategories' />
+			</li>
+			<li>
+				<input type="submit" name='save' value='${message:label.save}' />
+				<input type="submit" name='cancel' value='${message:label.cancel}' />
+			</li>
+		</ul>
+	</form>
+
+	<div title="${message:label.select_category}" class="select_category_dialog">
+		<ul class="category_list">
+			<t:listcategories category="root" controls='false' />
+		</ul>
+	</div>
+
+</t:block>
+
+</t:content>

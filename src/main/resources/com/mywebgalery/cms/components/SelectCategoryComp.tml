@@ -1,0 +1,7 @@
+<t:content  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<input type="text" value="${name}" class='select_category' />
+	<input type="hidden" name='${controlName}' value="${id}" class='categoryid' />
+
+</t:content>

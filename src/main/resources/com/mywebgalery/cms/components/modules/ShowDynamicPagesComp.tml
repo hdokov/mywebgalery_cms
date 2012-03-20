@@ -1,0 +1,12 @@
+<t:content  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<div>
+	<h3>${category.name}</h3>
+	<ul>
+		<li t:type='loop' t:source='pages' t:value='page'>
+			${page.title}
+		</li>
+	</ul>
+</div>
+</t:content>

@@ -223,8 +223,9 @@ public class AppModule {
      */
 	public static void contributeFileServicerDispatcher(MappedConfiguration<String, ModuleDescriptor> configuration) {
 		configuration.add("module.login", new ModuleDescriptor("Log in/Log out", "module.login"));
-		configuration.add("module.html", new ModuleDescriptor("Log in/Log out", "module.html"));
-		configuration.add("module.menu", new ModuleDescriptor("Log in/Log out", "module.menu"));
+		configuration.add("module.html", new ModuleDescriptor("HTML", "module.html"));
+		configuration.add("module.menu", new ModuleDescriptor("Menu", "module.menu"));
+		configuration.add("module.dynamic", new ModuleDescriptor("Dynamic pages", "module.dynamic"));
 	}
 
 	/**
@@ -238,6 +239,8 @@ public class AppModule {
 		configuration.add(new EditBlockContribution("module.html", "modules/ModuleHtml", "edit"));
 		configuration.add(new DisplayBlockContribution("module.menu", "modules/ModuleMenu", "view"));
 		configuration.add(new EditBlockContribution("module.menu", "modules/ModuleMenu", "edit"));
+		configuration.add(new DisplayBlockContribution("module.dynamic", "modules/ModuleDynamic", "view"));
+		configuration.add(new EditBlockContribution("module.dynamic", "modules/ModuleDynamic", "edit"));
 	}
 
 }

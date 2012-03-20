@@ -140,6 +140,14 @@ public class Page extends Model<Page> implements Resource {
 		return c.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Page> getByCategoryAndType(Session s, long categoryId, String type) throws Exception {
+		Criteria c = s.createCriteria(getClass());
+		c.add(Property.forName("categoryId").eq(categoryId)).add(Property.forName("type").eq(type));
+		c.addOrder(Order.asc("title"));
+		return c.list();
+	}
+
 	public void setDefault(Session s, long app, long pageId) throws Exception {
 		String sql = "update pages set defaultpage = (id = ?) where appid = ?";
 		SQLQuery q = s.createSQLQuery(sql);
