@@ -6,6 +6,8 @@
 	<ul>
 		<li t:type='loop' t:source='pages' t:value='page'>
 			${page.title}
+			<a href="?page=${page.id}">show</a>
+			<a href="?edit=${page.id}">edit</a>
 		</li>
 	</ul>
 </div>

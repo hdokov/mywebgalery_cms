@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.hibernate.Session;
 import org.json.simple.JSONObject;
@@ -27,6 +28,7 @@ public class ModuleDynamic extends BasePage {
 
 	private Category _root;
 
+	@Persist("flash")
 	private Category _category;
 
 	@Property

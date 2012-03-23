@@ -2,8 +2,9 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 <t:block id='view'>
-	view dynamic
 	<t:modules.showdynamicpagescomp module='module' category='category' data='data' />
+	<t:modules.editdynamicpagescomp category='category' />
+	<t:modules.viewdynamicpagescomp category='category' />
 </t:block>
 <t:block id='edit'>
 	<form t:type='form' t:id='form'>

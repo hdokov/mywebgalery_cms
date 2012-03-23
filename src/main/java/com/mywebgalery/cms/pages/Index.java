@@ -10,7 +10,6 @@ import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Environment;
-import org.apache.tapestry5.services.RequestGlobals;
 import org.hibernate.Session;
 
 import com.mywebgalery.cms.base.BasePage;
@@ -24,7 +23,6 @@ import com.mywebgalery.cms.model.Page;
 public class Index extends BasePage {
 
     @Inject private Environment _environment;
-    @Inject private RequestGlobals _request;
 
     private Page _page;
     private App _app;
@@ -36,7 +34,12 @@ public class Index extends BasePage {
 		try{
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
-			if(params != null && params.length > 0){
+
+			String page = getRequest().getRequest().getParameter("currentpage");
+
+			if(page != null){
+				_page = Page.getInstance().getByName(s, _app.getId(), page);
+			} else if(params != null && params.length > 0){
 				_page = Page.getInstance().getByName(s, _app.getId(), params[0].toString());
 			} else {
 				_page = Page.getInstance().getDefault(s, _app.getId());
@@ -114,17 +117,19 @@ public class Index extends BasePage {
 	@SetupRender
 	public void setup(){
 		_environment.push(Page.class, getPage());
+		_environment.push(App.class, getApp());
 	}
 
 	@CleanupRender
 	public void clean(){
 		_environment.pop(Page.class);
+		_environment.pop(App.class);
 	}
 
 	public String getAppName(){
 		if(_appName == null){
 			try{
-				URL url = new URL(_request.getHTTPServletRequest().getRequestURL().toString());
+				URL url = new URL(getRequest().getHTTPServletRequest().getRequestURL().toString());
 				String host = url.getHost();
 				if(host.startsWith("www."))
 					host = host.substring(4);
