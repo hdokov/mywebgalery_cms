@@ -5,6 +5,10 @@
 	<h2 class="page_header">${header}</h2>
 	<t:form t:id='form'>
 		<input type="hidden" name='currentpage' value="${currentPage.url}"/>
+		<input type="hidden" name="page" value="${page.id}"/>
+		<input type="hidden" name="action" value="edit"/>
+		<input type="hidden" name="appid" value="${category.appId}"/>
+		<input type="hidden" name="catid" value="${category.id}"/>
 		<ul>
 			<li>
 				<label>${message:label.title}</label>

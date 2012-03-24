@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.OnEvent;
-import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.hibernate.Session;
 import org.json.simple.JSONObject;
@@ -28,7 +27,6 @@ public class ModuleDynamic extends BasePage {
 
 	private Category _root;
 
-	@Persist("flash")
 	private Category _category;
 
 	@Property
@@ -120,5 +118,13 @@ public class ModuleDynamic extends BasePage {
 			}
 		}
 		return _category;
+	}
+
+	public boolean show(String param){
+		String action = getRequest().getRequest().getParameter("action");
+		if(param.equals(action))
+			return true;
+
+		return "list".equals(param) && action == null;
 	}
 }

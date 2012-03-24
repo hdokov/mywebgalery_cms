@@ -36,8 +36,8 @@ public class EditDynamicPagesComp extends BaseComponent {
 
 	public Page getPage() {
 		if(_page == null){
-			String pageid = _request.getParameter("edit");
-			if(pageid != null){
+			String pageid = _request.getParameter("page");
+			if(pageid != null && !"0".equals(pageid)){
 				try {
 					Session s = getTransactionManager().getSession();
 					s.beginTransaction();
@@ -75,12 +75,12 @@ public class EditDynamicPagesComp extends BaseComponent {
 	@OnEvent(component="form")
 	public Object submit(){
 		try {
-			_page.setAppId(_category.getAppId());
-			_page.setCategoryId(_category.getId());
+			_page.setAppId(Long.parseLong(_request.getParameter("appid")));
+			_page.setCategoryId(Long.parseLong(_request.getParameter("catid")));
 			_page.setType(Page.PAGE_TYPE_ARTICLE);
 			Session s = getTransactionManager().getSession();
 			s.beginTransaction();
-			_page.save(s);
+			_page.saveOrUpdate(s);
 			s.flush();
 		} catch (Exception e) {
 			addErrMsg(_messages.get("error.cannot_save_page"), null);

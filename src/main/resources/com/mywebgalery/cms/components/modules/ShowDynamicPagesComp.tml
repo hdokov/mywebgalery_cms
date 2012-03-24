@@ -5,10 +5,16 @@
 	<h3>${category.name}</h3>
 	<ul>
 		<li t:type='loop' t:source='pages' t:value='page'>
-			${page.title}
-			<a href="?page=${page.id}">show</a>
-			<a href="?edit=${page.id}">edit</a>
+			<t:outputraw value="showLink" />
+			<t:outputraw value="editLink" />
 		</li>
 	</ul>
+	<a href="?action=edit">${message:label.add_page}</a>
+	<ul>
+		<li t:type='loop' t:source='category.subcategories' t:value='cat'>
+			${cat.name}
+		</li>
+	</ul>
+
 </div>
 </t:content>

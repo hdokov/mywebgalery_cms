@@ -2,24 +2,21 @@ package com.mywebgalery.cms.components.modules;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.services.Request;
 import org.hibernate.Session;
 
 import com.mywebgalery.cms.base.BaseComponent;
 import com.mywebgalery.cms.model.Category;
-import com.mywebgalery.cms.model.Module;
 import com.mywebgalery.cms.model.Page;
 
 //@Import(library={"js/moduledynamic.js"})
 public class ShowDynamicPagesComp extends BaseComponent {
 
-	@Inject private Request _request;
+	@Inject private Messages _messages;
 
 	private List<Page> _pages;
 
@@ -27,16 +24,10 @@ public class ShowDynamicPagesComp extends BaseComponent {
 	private Page _page;
 
 	@Property
-	private Category _current;
-
-	@Parameter(required=true) @Property
-	private Module _module;
+	private Category _cat;
 
 	@Parameter @Property
 	private Category _category;
-
-	@Parameter @Property
-	private Map<String, String> _data;
 
 	public List<Page> getPages() {
 		if(_pages == null){
@@ -53,5 +44,12 @@ public class ShowDynamicPagesComp extends BaseComponent {
 		return _pages;
 	}
 
+	public String getShowLink(){
+		return String.format("<a href='?action=view&page=%s'>%s</a>", _page.getId(), _page.getTitle());
+	}
+
+	public String getEditLink(){
+		return String.format("<a href='?action=edit&page=%s'>%s</a>", _page.getId(), _messages.get("label.edit"));
+	}
 
 }
