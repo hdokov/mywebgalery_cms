@@ -53,6 +53,8 @@ public class DynamicPage extends BaseComponent {
         			Page p = _environment.peek(Page.class);
 					Module m = Module.getInstance().getByAppAndName(s, p.getAppId(), moduleName);
 					_environment.push(Module.class, m);
+					getSessionData().put("current_module", m);
+					getSessionData().put("init_module", true);
 					result = _blockSource.getDisplayBlock(m.getType());
 					System.out.println(result);
 				} catch (Exception e) {

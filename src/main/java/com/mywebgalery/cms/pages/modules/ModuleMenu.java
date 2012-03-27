@@ -3,7 +3,6 @@ package com.mywebgalery.cms.pages.modules;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.hibernate.Session;
@@ -23,10 +22,10 @@ public class ModuleMenu extends BasePage {
 	public static final String MENU_SHOW_HEADER_KEY = "showMenuHeader";
 	//public static final String MENU_NAME_KEY = "menuName";
 
-	@Environmental
+	//@Environmental
 	private Module _module;
 
-	private Map<String, String> data;
+	private Map<String, String> _data;
 
 	private Menu _root;
 
@@ -41,10 +40,10 @@ public class ModuleMenu extends BasePage {
 			if(getRequest().getRequest().getParameter("cancel")!=null){
 				getTransactionManager().rollback();
 			} else {
-				_module.setData(JSONValue.toJSONString(getData()));
+				getModule().setData(JSONValue.toJSONString(getData()));
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_module.saveOrUpdate(s);
+				getModule().saveOrUpdate(s);
 			}
 			return Modules.class;
 		} catch (Exception e) {
@@ -59,7 +58,7 @@ public class ModuleMenu extends BasePage {
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_root = Menu.getInstance().getRootMenu(s, _module.getAppId());
+				_root = Menu.getInstance().getRootMenu(s, getModule().getAppId());
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);
 				addErrMsg(e.getMessage(), null);
@@ -71,20 +70,26 @@ public class ModuleMenu extends BasePage {
 	}
 
 	private Map<String, String> getData(){
-		if(data == null){
-			data = new HashMap<String, String>();
-			if(_module.getData() != null){
-				JSONObject o = (JSONObject)JSONValue.parse(_module.getData());
+		getModule();
+		if(_data == null){
+			_data = new HashMap<String, String>();
+			if(getModule().getData() != null){
+				JSONObject o = (JSONObject)JSONValue.parse(getModule().getData());
 				for(Object k : o.keySet()){
-					data.put(String.valueOf(k), String.valueOf(o.get(k)));
+					_data.put(String.valueOf(k), String.valueOf(o.get(k)));
 				}
 			}
 		}
-		return data;
+		return _data;
 	}
 
 	public Module getModule() {
-		return _module;
+		if(getSessionData().get("init_module") != null){
+			_menu = null;
+			_data = null;
+			getSessionData().put("init_module", null);
+		}
+		return (Module)getSessionData().get("current_module");
 	}
 
 	public String getMenuId(){

@@ -9,7 +9,7 @@
 			<t:outputraw value="editLink" />
 		</li>
 	</ul>
-	<a href="?action=edit">${message:label.add_page}</a>
+	<a href="?action=edit">${message:label.add_new_page}</a>
 	<ul>
 		<li t:type='loop' t:source='category.subcategories' t:value='cat'>
 			${cat.name}
