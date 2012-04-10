@@ -26,6 +26,14 @@ public class UserSessionData {
 		put("user", admin);
 	}
 
+	public User getFrontendUser(){
+		return (User)get("frontenduser");
+	}
+
+	public void setFrontendUser(User admin){
+		put("frontenduser", admin);
+	}
+
 	public void clear(){
 		_data.clear();
 	}

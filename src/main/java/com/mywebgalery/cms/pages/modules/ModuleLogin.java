@@ -1,17 +1,15 @@
 package com.mywebgalery.cms.pages.modules;
 
-import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.services.Request;
 import org.hibernate.Session;
 
-import com.mywebgalery.cms.base.BasePage;
+import com.mywebgalery.cms.base.ModulePage;
 import com.mywebgalery.cms.model.Module;
+import com.mywebgalery.cms.model.User;
 import com.mywebgalery.cms.pages.admin.apps.Modules;
 
-public class ModuleLogin extends BasePage {
+public class ModuleLogin extends ModulePage {
 
 	@Property
 	private String _username;
@@ -19,16 +17,26 @@ public class ModuleLogin extends BasePage {
 	@Property
 	private String _password;
 
-	@Environmental
-	private Module context;
-
-	@Inject private Request _req;
+	@Override
+	public void initData() {
+		_username = null;
+		_password = null;
+	}
 
 	@OnEvent(component="loginform")
 	public void login(){
-		if(!"qwe".equals(_username)){
-			getLog().error("invalid username and pass");
-			addErrMsg("invalid username and pass - "+_req.getParameter("test"), null);
+		try {
+			Session s = getTransactionManager().getSession();
+			s.beginTransaction();
+			User u = User.getInstance().login(s, _username, _password, false);
+			if(u == null){
+				addErrMsg(getMessages().get("error.invalid_login"), null);
+				return;
+			}
+			getSessionData().setFrontendUser(u);
+		} catch (Exception e) {
+			getLog().error(e.getMessage(), e);
+			addErrMsg(e.getMessage(), null);
 		}
 	}
 
@@ -40,7 +48,7 @@ public class ModuleLogin extends BasePage {
 			} else {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				context.saveOrUpdate(s);
+				getModule().saveOrUpdate(s);
 			}
 			return Modules.class;
 		} catch (Exception e) {
@@ -51,6 +59,6 @@ public class ModuleLogin extends BasePage {
 	}
 
 	public Module getModule() {
-		return context;
+		return getModule();
 	}
 }

@@ -41,7 +41,8 @@ public class Index extends BasePage {
 				_page = Page.getInstance().getByName(s, _app.getId(), page);
 			} else if(params != null && params.length > 0){
 				_page = Page.getInstance().getByName(s, _app.getId(), params[0].toString());
-			} else {
+			}
+			if(_page == null){
 				_page = Page.getInstance().getDefault(s, _app.getId());
 			}
 		} catch (Exception e) {

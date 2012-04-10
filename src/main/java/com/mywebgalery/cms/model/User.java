@@ -206,12 +206,22 @@ public class User extends Model<User> {
 	}
 
 	public User login(Session s, String name, String pass, boolean admin) throws Exception {
-		String sql = "select * from users where lower(name) = ? and admin = ?";
+		String sql = "select * from users where lower(name) = ?";
 		SQLQuery q = s.createSQLQuery(sql);
 		q.setString(0, name);
-		q.setBoolean(1, admin);
+		//q.setBoolean(1, admin);
 		q.addEntity(getClass());
 		User u = (User)q.uniqueResult();
+		if(u != null && !pass.equals(u.getPass())){
+			return null;
+		}
+		if(admin)
+			u.setLastLoginAdmin(new Date());
+		else
+			u.setLastLoginUser(new Date());
+
+		u.save(s);
+		s.evict(u);
 		return u;
 	}
 

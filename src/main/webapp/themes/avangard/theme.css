@@ -8,18 +8,18 @@ a { color: #FF85B7; }
 a:hover { text-decoration: none; color: #999; }
 
 .colors1 { border-color: #FF85B7; background: #f5f5f5; }
-.colors1 a:hover { color: #999; }
-.colors1 .border, .colors3 .menu li { border-color: #FF85B7; }
+.colors1 a:hover, .colors1 a.selected_menu { color: #999; }
+.colors1 .border, .colors1 .menu li { border-color: #FF85B7; }
 
 .colors2 { border-color: #FF85B7; background: #FFD2D2; color:#666; }
 .colors2 .border, .colors2 .menu li { border-color: #FF85B7; }
 .colors2 a { color: #666; }
-.colors2 a:hover { color: #666;background: #ddd; }
+.colors2 a:hover, .colors2 a.selected_menu { color: #666;background: #ddd; }
 
 .colors3 { border-color: #FF85B7; background: transparent; }
 .colors3 a {color: #666;}
 .colors3 .border { border-color: #FF85B7; }
-.colors3 a:hover { color: #999; }
+.colors3 a:hover, .colors3 a.selected_menu { color: #999; }
 .colors3 .menu li { border-color: #FF85B7; }
 
 .footer p.legal a:hover {color:#999;}

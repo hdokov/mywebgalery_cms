@@ -7,18 +7,18 @@ a { color: #339900; }
 a:hover { text-decoration: none; color: #006600; }
 
 .colors1 { border-color: #339900; background: #f5f5f5; }
-.colors1 a:hover { color: #006600; }
-.colors1 .border, .colors3 .menu li { border-color: #339900; }
+.colors1 a:hover, .colors1 a.selected_menu { color: #006600; }
+.colors1 .border, .colors1 .menu li { border-color: #339900; }
 
 .colors2 { border-color: #339900; background: #006600; color:#f5f5f5; }
 .colors2 .border, .colors2 .menu li { border-color: #339900; }
 .colors2 a { color: #f5f5f5; }
-.colors2 a:hover { color: #f5f5f5;background: #339900; }
+.colors2 a:hover, .colors2 a.selected_menu { color: #f5f5f5;background: #339900; }
 
 .colors3 { border-color: #339900; background: transparent; }
 .colors3 a {color: #fff7c0;}
 .colors3 .border { border-color: #339900; }
-.colors3 a:hover { color: #f5f5f5; }
+.colors3 a:hover, .colors3 a.selected_menu { color: #f5f5f5; }
 .colors3 .menu li { border-color: #339900; }
 
 .footer p.legal a:hover {color:#f5f5f5;}

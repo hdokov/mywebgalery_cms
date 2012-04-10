@@ -4,10 +4,10 @@
 <t:block id='view'>
 	<h3 class="menu_title" t:type='if' t:test='showHeader'>${module.displayName}</h3>
 	<ul class='menu'>
-		<li class='root_menu' t:type='if' t:test='showRoot'><a t:type='pagelink' t:page='index' t:context='menu.uri'>${menu.name}</a></li>
+		<li class='root_menu' t:type='if' t:test='showRoot'><a t:type='pagelink' class='${rootClass}'  t:page='index' t:context='menu.uri'>${menu.name}</a></li>
 		<t:if test='showSubmenus'>
 			<li t:type='loop' t:value='current' t:source='menu.submenus' class='submenu'>
-				<a t:type='pagelink' t:page='index' t:context='current.uri'>${current.name}</a>
+				<a t:type='pagelink' t:page='index' class='${menuClass}' t:context='current.uri'>${current.name}</a>
 			</li>
 		</t:if>
 	</ul>

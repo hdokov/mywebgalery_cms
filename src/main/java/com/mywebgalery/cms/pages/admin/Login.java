@@ -1,7 +1,5 @@
 package com.mywebgalery.cms.pages.admin;
 
-import java.util.Date;
-
 import javax.persistence.EntityExistsException;
 
 import org.apache.tapestry5.annotations.OnEvent;
@@ -29,9 +27,6 @@ public class Login extends BasePage {
 				addErrMsg(getMessages().get("error.invalid_login"), null);
 				return null;
 			}
-			u.setLastLoginAdmin(new Date());
-			u.save(s);
-			s.evict(u);
 			getSessionData().setUser(u);
 			return "admin/myprofile";
 		} catch (EntityExistsException e) {

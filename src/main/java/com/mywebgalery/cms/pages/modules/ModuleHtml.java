@@ -1,17 +1,18 @@
 package com.mywebgalery.cms.pages.modules;
 
-import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.hibernate.Session;
 
-import com.mywebgalery.cms.base.BasePage;
+import com.mywebgalery.cms.base.ModulePage;
 import com.mywebgalery.cms.model.Module;
 import com.mywebgalery.cms.pages.admin.apps.Modules;
 
-public class ModuleHtml extends BasePage {
+public class ModuleHtml extends ModulePage {
 
-	@Environmental
-	private Module context;
+	@Override
+	public void initData() {
+		//do nothing
+	}
 
 	@OnEvent(component="htmlform")
 	public Object submit(){
@@ -21,7 +22,7 @@ public class ModuleHtml extends BasePage {
 			} else {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				context.saveOrUpdate(s);
+				getModule().saveOrUpdate(s);
 			}
 			return Modules.class;
 		} catch (Exception e) {
@@ -32,11 +33,11 @@ public class ModuleHtml extends BasePage {
 	}
 
 	public String getHtml(){
-		return context.getContent();
+		return getModule().getContent();
 	}
 
 	public Module getModule() {
-		return context;
+		return getModule();
 	}
 
 

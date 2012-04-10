@@ -9,21 +9,17 @@ import org.hibernate.Session;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import com.mywebgalery.cms.base.BasePage;
+import com.mywebgalery.cms.base.ModulePage;
 import com.mywebgalery.cms.model.Menu;
-import com.mywebgalery.cms.model.Module;
 import com.mywebgalery.cms.pages.admin.apps.Modules;
 
-public class ModuleMenu extends BasePage {
+public class ModuleMenu extends ModulePage {
 
 	public static final String MENU_ID_KEY = "menuId";
 	public static final String MENU_SHOW_ROOT_KEY = "showRoot";
 	public static final String MENU_SHOW_SUB_KEY = "showSubmenus";
 	public static final String MENU_SHOW_HEADER_KEY = "showMenuHeader";
 	//public static final String MENU_NAME_KEY = "menuName";
-
-	//@Environmental
-	private Module _module;
 
 	private Map<String, String> _data;
 
@@ -33,6 +29,14 @@ public class ModuleMenu extends BasePage {
 
 	@Property
 	private Menu _current;
+
+	private String _currentUrl;
+
+	@Override
+	public void initData() {
+		_menu = null;
+		_data = null;
+	}
 
 	@OnEvent(component="form")
 	public Object submit(){
@@ -81,15 +85,6 @@ public class ModuleMenu extends BasePage {
 			}
 		}
 		return _data;
-	}
-
-	public Module getModule() {
-		if(getSessionData().get("init_module") != null){
-			_menu = null;
-			_data = null;
-			getSessionData().put("init_module", null);
-		}
-		return (Module)getSessionData().get("current_module");
 	}
 
 	public String getMenuId(){
@@ -143,4 +138,20 @@ public class ModuleMenu extends BasePage {
 		}
 		return _menu;
 	}
+
+	public String getRootClass(){
+		return getCurrentUrl().equals("/"+getMenu().getUri()) ? "selected_menu" : "";
+	}
+
+	public String getMenuClass(){
+		return getCurrentUrl().equals("/"+_current.getUri()) ? "selected_menu" : "";
+	}
+
+	public String getCurrentUrl() {
+		if(_currentUrl == null)
+			_currentUrl = getRequest().getHTTPServletRequest().getRequestURI();
+		return _currentUrl;
+	}
+
+
 }

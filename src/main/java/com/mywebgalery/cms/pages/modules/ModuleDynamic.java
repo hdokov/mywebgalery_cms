@@ -3,25 +3,20 @@ package com.mywebgalery.cms.pages.modules;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.hibernate.Session;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import com.mywebgalery.cms.base.BasePage;
+import com.mywebgalery.cms.base.ModulePage;
 import com.mywebgalery.cms.model.Category;
-import com.mywebgalery.cms.model.Module;
 import com.mywebgalery.cms.pages.admin.apps.Modules;
 
-public class ModuleDynamic extends BasePage {
+public class ModuleDynamic extends ModulePage {
 
 	public static final String CATEGORY_ID_KEY = "categoryId";
 	public static final String CATEGORY_SHOW_SUB_KEY = "showSubcategories";
-
-	@Environmental
-	private Module _module;
 
 	private Map<String, String> _data;
 
@@ -29,8 +24,15 @@ public class ModuleDynamic extends BasePage {
 
 	private Category _category;
 
+	@SuppressWarnings("unused")
 	@Property
 	private Category _current;
+
+	@Override
+	public void initData() {
+		_category = null;
+		_data = null;
+	}
 
 	@OnEvent(component="form")
 	public Object submit(){
@@ -38,10 +40,10 @@ public class ModuleDynamic extends BasePage {
 			if(getRequest().getRequest().getParameter("cancel")!=null){
 				getTransactionManager().rollback();
 			} else {
-				_module.setData(JSONValue.toJSONString(getData()));
+				getModule().setData(JSONValue.toJSONString(getData()));
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_module.saveOrUpdate(s);
+				getModule().saveOrUpdate(s);
 			}
 			return Modules.class;
 		} catch (Exception e) {
@@ -56,7 +58,7 @@ public class ModuleDynamic extends BasePage {
 			try {
 				Session s = getTransactionManager().getSession();
 				s.beginTransaction();
-				_root = Category.getInstance().getRootCategory(s, _module.getAppId());
+				_root = Category.getInstance().getRootCategory(s, getModule().getAppId());
 			} catch (Exception e) {
 				getLog().error(e.getMessage(),e);
 				addErrMsg(e.getMessage(), null);
@@ -69,19 +71,18 @@ public class ModuleDynamic extends BasePage {
 
 	public Map<String, String> getData(){
 		if(_data == null){
-			_data = new HashMap<String, String>();
-			if(_module.getData() != null){
-				JSONObject o = (JSONObject)JSONValue.parse(_module.getData());
+			if(getModule().getData() != null){
+				_data = new HashMap<String, String>();
+				JSONObject o = (JSONObject)JSONValue.parse(getModule().getData());
 				for(Object k : o.keySet()){
 					_data.put(String.valueOf(k), String.valueOf(o.get(k)));
 				}
+			} else {
+				//duplicated because getModule() may clear _data
+				_data = new HashMap<String, String>();
 			}
 		}
 		return _data;
-	}
-
-	public Module getModule() {
-		return _module;
 	}
 
 	public String getCategoryId(){
